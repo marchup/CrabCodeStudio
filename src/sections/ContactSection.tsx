@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 
 const ContactSection = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const socialLinks = [
     {
@@ -32,11 +33,32 @@ const ContactSection = () => {
     },
   ];
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      toast.success('¡Gracias por suscribirte! Te mantendremos informado.');
-      setEmail('');
+    
+    if (!email) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xdkynkrj', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      
+      if (response.ok) {
+        toast.success('¡Gracias por suscribirte! Te mantendré informado.');
+        setEmail('');
+      } else {
+        toast.error('Hubo un error. Por favor, intentá de nuevo.');
+      }
+    } catch (error) {
+      toast.error('Hubo un error. Por favor, intentá de nuevo.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -57,8 +79,8 @@ const ContactSection = () => {
               Trabajemos <span className="text-gradient">juntos</span>
             </h2>
             <p className="text-lg text-gray-400 mb-8">
-              ¿Tienes una idea para un proyecto? ¿Quieres colaborar o simplemente 
-              charlar sobre videojuegos? ¡Estamos abiertos a nuevas oportunidades!
+              ¿Tenés una idea para un proyecto? ¿Querés colaborar o simplemente 
+              charlar sobre videojuegos? ¡Estoy abierto a nuevas oportunidades!
             </p>
 
             {/* Social Links */}
@@ -87,11 +109,11 @@ const ContactSection = () => {
           {/* Right Content - Newsletter */}
           <div className="p-8 rounded-3xl bg-gray-800/50 border border-gray-700/50 backdrop-blur-sm">
             <h3 className="text-2xl font-bold text-white mb-4">
-              Mantente informado
+              Seguí el desarrollo
             </h3>
             <p className="text-gray-400 mb-6">
-              Suscríbete para recibir actualizaciones sobre el desarrollo de San José 
-              y futuros proyectos de CrabCode.
+              Suscribite para recibir novedades de San José y los próximos proyectos.
+              Sin spam, solo contenido del juego.
             </p>
 
             <form onSubmit={handleSubscribe} className="space-y-4">
@@ -102,20 +124,22 @@ const ContactSection = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="tu@email.com"
+                  required
                   className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-900/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 transition-all"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity flex items-center justify-center gap-2 glow-orange"
+                disabled={isSubmitting}
+                className="w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity flex items-center justify-center gap-2 glow-orange disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-5 h-5" />
-                Suscribirme
+                {isSubmitting ? 'Enviando...' : 'Suscribirme'}
               </button>
             </form>
 
             <p className="text-xs text-gray-500 mt-4 text-center">
-              No enviamos spam. Puedes darte de baja en cualquier momento.
+              Podés darte de baja cuando quieras. 🎮
             </p>
           </div>
         </div>
@@ -127,7 +151,7 @@ const ContactSection = () => {
               <span className="text-2xl font-bold text-gradient">CrabCode</span>
             </div>
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} CrabCode Studio. Todos los derechos reservados.
+              © {new Date().getFullYear()} CrabCode. Todos los derechos reservados.
             </p>
             <div className="flex items-center gap-4">
               <a href="#" className="text-gray-500 hover:text-orange-400 text-sm transition-colors">
