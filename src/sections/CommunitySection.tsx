@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 
 const CommunitySection = () => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const socialLinks = [
     {
@@ -36,11 +37,36 @@ const CommunitySection = () => {
     },
   ];
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      toast.success('¡Bienvenido a la comunidad! 🦀');
-      setEmail('');
+    
+    if (!email) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xdkynkrj', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          email,
+          _subject: 'Nuevo suscriptor desde CrabCode',
+          _replyto: email,
+        }),
+      });
+      
+      if (response.ok) {
+        toast.success('¡Bienvenido a la comunidad! 🦀 Te llegará un email de confirmación.');
+        setEmail('');
+      } else {
+        toast.error('Hubo un error. Por favor, intentá de nuevo.');
+      }
+    } catch (error) {
+      toast.error('Hubo un error. Por favor, intentá de nuevo.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -60,7 +86,7 @@ const CommunitySection = () => {
             Sé parte de la <span className="text-gradient">aventura</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Acompañá el desarrollo de San José. Tu apoyo nos impulsa a seguir creando.
+            Acompañá el desarrollo de San José. Tu apoyo me impulsa a seguir creando.
           </p>
         </div>
 
@@ -106,15 +132,17 @@ const CommunitySection = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="tu@email.com"
+                  required
                   className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-900/50 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 transition-all"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity flex items-center justify-center gap-2 glow-orange"
+                disabled={isSubmitting}
+                className="w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity flex items-center justify-center gap-2 glow-orange disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-5 h-5" />
-                Suscribirme
+                {isSubmitting ? 'Enviando...' : 'Suscribirme'}
               </button>
             </form>
 
