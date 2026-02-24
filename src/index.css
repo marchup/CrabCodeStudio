@@ -198,3 +198,103 @@
 .crab-logo-click {
   animation: powerUp 0.5s ease-out;
 }
+
+/* Efectos Glitch para el logo */
+
+@keyframes glitchSlide {
+  0% {
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+  25% {
+    transform: translate(2px, -1px);
+    clip-path: inset(10% 0 30% 0);
+  }
+  50% {
+    transform: translate(-2px, 1px);
+    clip-path: inset(30% 0 10% 0);
+  }
+  75% {
+    transform: translate(1px, 2px);
+    clip-path: inset(20% 0 40% 0);
+  }
+  100% {
+    transform: translate(-1px, -2px);
+    clip-path: inset(40% 0 20% 0);
+  }
+}
+
+@keyframes glitchNoise {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.1;
+  }
+  33% {
+    transform: translate(2px, 1px);
+    opacity: 0.2;
+  }
+  66% {
+    transform: translate(-2px, -1px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(1px, -2px);
+    opacity: 0.1;
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+/* Animación de "power-up" cuando se hace click */
+@keyframes powerUp {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(249, 115, 22, 0));
+  }
+  30% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.6));
+  }
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 25px rgba(249, 115, 22, 0.9));
+  }
+  70% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.6));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(249, 115, 22, 0));
+  }
+}
+
+.crab-logo-click {
+  animation: powerUp 0.5s ease-out;
+}
+
+/* Efecto de borde neón sutil */
+.crab-logo-container::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #f97316, #dc2626, #f97316);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.crab-logo-container:hover::after {
+  opacity: 0.3;
+}
