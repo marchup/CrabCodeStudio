@@ -19,7 +19,7 @@ const HeroSection = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Pixel particles for retro gaming feel
+    // Pixel particles for retro gaming feel - AUMENTADAS a 120 partículas
     const particles: Array<{
       x: number;
       y: number;
@@ -30,17 +30,18 @@ const HeroSection = () => {
       alpha: number;
     }> = [];
 
-    const colors = ['#f97316', '#dc2626', '#fb923c', '#fca5a5'];
+    const colors = ['#f97316', '#dc2626', '#fb923c', '#fca5a5', '#ff8c42', '#e65c1e'];
 
-    for (let i = 0; i < 60; i++) {
+    // MÁS PARTÍCULAS: aumentamos de 60 a 120
+    for (let i = 0; i < 120; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 1,
-        vy: (Math.random() - 0.5) * 1,
-        size: Math.random() > 0.7 ? 4 : 2,
+        vx: (Math.random() - 0.5) * 1.2, // Un poco más de movimiento
+        vy: (Math.random() - 0.5) * 1.2,
+        size: Math.random() > 0.6 ? 4 : 2, // Más partículas grandes (40% en vez de 30%)
         color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.6 + 0.2,
+        alpha: Math.random() * 0.7 + 0.3, // Más visibles (mínimo 0.3 en vez de 0.2)
       });
     }
 
@@ -51,7 +52,7 @@ const HeroSection = () => {
       frameCount++;
       // Render every 2nd frame for performance (30fps)
       if (frameCount % 2 === 0) {
-        ctx.fillStyle = 'rgba(17, 20, 28, 0.15)';
+        ctx.fillStyle = 'rgba(17, 20, 28, 0.1)'; // Más sutil el fade para que las partículas duren más
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         particles.forEach((particle) => {
@@ -104,13 +105,13 @@ const HeroSection = () => {
 
       {/* Grid overlay for retro feel */}
       <div 
-        className="absolute inset-0 z-[1] opacity-[0.03]"
+        className="absolute inset-0 z-[1] opacity-[0.05]" // Aumentado ligeramente para que se note más
         style={{
           backgroundImage: `
             linear-gradient(rgba(249, 115, 22, 0.5) 1px, transparent 1px),
             linear-gradient(90deg, rgba(249, 115, 22, 0.5) 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px'
+          backgroundSize: '40px 40px' // Grid más denso
         }}
       />
 
@@ -119,9 +120,9 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
-        {/* Logo - Crab Mascot */}
+        {/* Logo - Crab Mascot - TAMAÑO AUMENTADO A 180 */}
         <div className="mb-6 animate-fade-in flex justify-center">
-          <CrabLogo size={140} animated />
+          <CrabLogo size={180} animated />
         </div>
 
         {/* Badge */}
