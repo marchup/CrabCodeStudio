@@ -51,9 +51,9 @@ const CrabLogo = ({ size = 100, animated = true, className = '' }: CrabLogoProps
       style={{ width: size, height: size }}
       onClick={handleClick}
     >
-      {/* Imagen principal del cangrejo */}
+      {/* Imagen principal del cangrejo - AHORA CON FONDO TRANSPARENTE */}
       <img
-        src="/crab-mascot.png"
+        src="/SpatCrab_2.png"
         alt="CrabCode Mascot"
         className={`w-full h-full object-contain transition-all duration-100 relative z-10 ${
           isGlitching ? 'opacity-90' : 'opacity-100'
@@ -63,19 +63,27 @@ const CrabLogo = ({ size = 100, animated = true, className = '' }: CrabLogoProps
         }}
       />
 
-      {/* Capas de glitch (solo visibles durante el efecto) */}
+      {/* Capas de glitch (solo visibles durante el efecto) - TODAS CON TRANSPARENCIA */}
       {isGlitching && (
         <>
-          {/* Capa roja desplazada */}
+          {/* Capa roja desplazada - AHORA CON SpatCrab_2.png */}
           <img
-  src="/SpatCrab_2.png"  // Ahora usa la versión con fondo transparente
-  alt="CrabCode Mascot"
-  className="w-full h-full object-contain transition-all duration-100 relative z-10"
-/>
+            src="/SpatCrab_2.png"
+            alt=""
+            className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
+            style={{
+              mixBlendMode: 'multiply',
+              opacity: 0.4,
+              filter: 'brightness(1.5) sepia(1) hue-rotate(-50deg) saturate(10)',
+              transform: 'translate(4px, -2px)',
+              animation: 'glitchSlide 0.1s infinite steps(2)',
+            }}
+            aria-hidden="true"
+          />
           
-          {/* Capa azul desplazada */}
+          {/* Capa azul desplazada - AHORA CON SpatCrab_2.png */}
           <img
-            src="/crab-mascot.png"
+            src="/SpatCrab_2.png"
             alt=""
             className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
             style={{
