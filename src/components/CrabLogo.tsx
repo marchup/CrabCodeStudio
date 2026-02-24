@@ -68,18 +68,10 @@ const CrabLogo = ({ size = 100, animated = true, className = '' }: CrabLogoProps
         <>
           {/* Capa roja desplazada */}
           <img
-            src="/crab-mascot.png"
-            alt=""
-            className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
-            style={{
-              mixBlendMode: 'multiply',
-              opacity: 0.4,
-              filter: 'brightness(1.5) sepia(1) hue-rotate(-50deg) saturate(10)',
-              transform: 'translate(4px, -2px)',
-              animation: 'glitchSlide 0.1s infinite steps(2)',
-            }}
-            aria-hidden="true"
-          />
+  src="/SpatCrab_2.png"  // Ahora usa la versión con fondo transparente
+  alt="CrabCode Mascot"
+  className="w-full h-full object-contain transition-all duration-100 relative z-10"
+/>
           
           {/* Capa azul desplazada */}
           <img
