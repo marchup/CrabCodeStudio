@@ -131,9 +131,12 @@ const HeroSection = () => {
           <span className="text-sm text-orange-300 font-medium">Indie Game Studio</span>
         </div>
 
-        {/* Title */}
+        {/* Title - AHORA CON "Games" DESTACADO */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
-          <span className="text-gradient">CrabCode</span>
+          <span className="text-gradient">CrabCode</span>{' '}
+          <span className="text-gradient-games animate-glitch inline-block">
+            Games
+          </span>
         </h1>
 
         {/* Tagline */}
@@ -141,9 +144,9 @@ const HeroSection = () => {
           historias y aventuras para jugar
         </p>
 
-        {/* Description */}
+        {/* Description - AHORA EN PRIMERA PERSONA */}
         <p className="text-base text-gray-500 max-w-xl mx-auto mb-10">
-          Somos un estudio indie de Argentina. Creamos juegos con alma, 
+          Soy un desarrollador indie de Argentina. Creo juegos con alma, 
           donde cada pixel cuenta una historia.
         </p>
 
