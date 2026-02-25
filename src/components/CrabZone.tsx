@@ -4,6 +4,7 @@ const CrabZone = () => {
   const [frame, setFrame] = useState(0);
   const [position, setPosition] = useState(50);
   const [direction, setDirection] = useState(1);
+  const [targetPosition, setTargetPosition] = useState(100); // posición objetivo para movimiento aleatorio
   const zoneRef = useRef<HTMLDivElement>(null);
   
   // Partículas
@@ -16,52 +17,84 @@ const CrabZone = () => {
     type: string;
   }>>([]);
 
-  // Animación del cangrejo (15 frames)
+  // Animación del cangrejo (15 frames) - MÁS RÁPIDA
   useEffect(() => {
     const interval = setInterval(() => {
       setFrame((prev) => (prev + 1) % 15);
-    }, 100);
+    }, 60); // Antes 100ms, ahora 60ms (más rápido)
     return () => clearInterval(interval);
   }, []);
 
-  // Movimiento del cangrejo en espacio limitado
+  // Movimiento del cangrejo - MÁS ALEATORIO
+  useEffect(() => {
+    const zoneWidth = zoneRef.current?.clientWidth || 800;
+    const crabWidth = 80;
+    const maxPosition = zoneWidth - crabWidth;
+    
+    // Generar nueva posición objetivo aleatoria cada 2-4 segundos
+    const targetInterval = setInterval(() => {
+      const newTarget = Math.random() * maxPosition;
+      setTargetPosition(newTarget);
+      
+      // Determinar dirección basada en el objetivo
+      setDirection(newTarget > position ? 1 : -1);
+    }, Math.random() * 2000 + 2000); // Entre 2 y 4 segundos
+
+    return () => clearInterval(targetInterval);
+  }, [position]);
+
+  // Movimiento suave hacia el objetivo
   useEffect(() => {
     const moveInterval = setInterval(() => {
       setPosition((prev) => {
         const zoneWidth = zoneRef.current?.clientWidth || 800;
-        const crabWidth = 80; // ancho aproximado del cangrejo
-        const newPos = prev + direction * 1.5;
+        const crabWidth = 80;
+        const maxPosition = zoneWidth - crabWidth;
         
-        if (newPos > zoneWidth - crabWidth) {
-          setDirection(-1);
-          return zoneWidth - crabWidth;
-        }
+        // Calcular diferencia con el objetivo
+        const diff = targetPosition - prev;
+        
+        // Movimiento más orgánico: a veces se queda quieto, a veces avanza más rápido
+        const step = (Math.random() * 2 + 1) * (diff > 0 ? 1 : -1);
+        let newPos = prev + step;
+        
+        // Limitar dentro de los bordes
         if (newPos < 0) {
-          setDirection(1);
-          return 0;
+          newPos = 0;
+          setTargetPosition(Math.random() * maxPosition); // nuevo objetivo si llega al borde
         }
+        if (newPos > maxPosition) {
+          newPos = maxPosition;
+          setTargetPosition(Math.random() * maxPosition); // nuevo objetivo si llega al borde
+        }
+        
+        // Actualizar dirección basada en el movimiento real
+        if (newPos > prev) setDirection(1);
+        if (newPos < prev) setDirection(-1);
+        
         return newPos;
       });
-    }, 50);
+    }, 80); // Movimiento cada 80ms
+
     return () => clearInterval(moveInterval);
-  }, [direction]);
+  }, [targetPosition]);
 
   // Generar partículas (presas para el cangrejo)
   useEffect(() => {
     const generateParticle = () => {
-      const types = ['✦', '✧', '🌟', '💫', '·', '∘'];
+      const types = ['✦', '✧', '🌟', '💫', '·', '∘', '⚬', '○'];
       const newParticle = {
         id: Date.now() + Math.random(),
         x: Math.random() * (zoneRef.current?.clientWidth || 800),
-        y: 40 + Math.random() * 30, // altura variada
-        size: Math.random() * 8 + 4,
-        speed: Math.random() * 1.5 + 0.5,
+        y: 40 + Math.random() * 40,
+        size: Math.random() * 10 + 4,
+        speed: Math.random() * 2 + 0.5,
         type: types[Math.floor(Math.random() * types.length)],
       };
       setParticles((prev) => [...prev, newParticle]);
     };
 
-    const interval = setInterval(generateParticle, 600);
+    const interval = setInterval(generateParticle, 500); // Más partículas
     return () => clearInterval(interval);
   }, []);
 
@@ -72,10 +105,10 @@ const CrabZone = () => {
         prev
           .map((p) => ({
             ...p,
-            y: p.y - p.speed * 0.3,
-            x: p.x + Math.sin(p.y * 0.1) * 0.3, // movimiento orgánico
+            y: p.y - p.speed * 0.4,
+            x: p.x + Math.sin(p.y * 0.1) * 0.5,
           }))
-          .filter((p) => p.y > -20)
+          .filter((p) => p.y > -30)
       );
     }, 50);
     return () => clearInterval(animate);
@@ -87,10 +120,10 @@ const CrabZone = () => {
         ref={zoneRef}
         className="relative h-28 mx-auto max-w-5xl px-4"
       >
-        {/* Texto sutil "zona de caza" */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 text-xs text-orange-500/30 font-mono">
-          🦀 ~ zona de caza ~ 🦀
-        </div>
+        {/* Texto sutil "zona de caza" - AHORA "Crab is working" */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 text-xs text-orange-500/30 font-mono">
+        🦀 ~ Crab is working ~ 🦀
+    </div>
 
         {/* Partículas (presas) */}
         {particles.map((p) => (
@@ -112,7 +145,7 @@ const CrabZone = () => {
 
         {/* Cangrejo cazador */}
         <div
-          className="absolute bottom-0 transition-all duration-100 ease-linear"
+          className="absolute bottom-0 transition-all duration-100 ease-out"
           style={{ left: position }}
         >
           <img
