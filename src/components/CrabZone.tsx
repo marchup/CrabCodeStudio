@@ -155,9 +155,8 @@ const CrabZone = () => {
        {/* Cangrejo cazador */}
 <div
   className="absolute bottom-0 transition-all duration-100 ease-linear"
-  style={{ 
-    left: position,
-    transition: isMoving ? 'left 80ms linear' : 'none'
+   style={{
+    transform: direction === 1 ? 'scaleX(-1)' : 'scaleX(1)', // INVERTIDO
   }}
 >
   <img
