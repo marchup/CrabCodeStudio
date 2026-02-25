@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Youtube, MessageCircle, Instagram, Mail, Send, Heart } from 'lucide-react';
+import { Youtube, MessageCircle, Instagram, Mail, Send, Heart, Twitter } from 'lucide-react';
 import { toast } from 'sonner';
 
 const CommunitySection = () => {
@@ -27,6 +27,13 @@ const CommunitySection = () => {
       href: '#',
       color: 'from-indigo-600 to-indigo-500',
       description: 'Chat con la comunidad',
+    },
+    {
+      icon: Twitter,
+      label: 'Twitter',
+      href: '#',
+      color: 'from-blue-500 to-blue-400',
+      description: 'Novedades y updates',
     },
     {
       icon: Mail,
@@ -90,17 +97,17 @@ const CommunitySection = () => {
           </p>
         </div>
 
-        {/* Social Links Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+        {/* Social Links Grid - 5 íconos */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-16">
           {socialLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group p-6 rounded-2xl bg-gray-800/50 border border-gray-700/50 hover:border-orange-500/50 transition-all hover:bg-gray-800/80"
+              className="group p-6 rounded-2xl bg-gray-800/50 border border-gray-700/50 hover:border-orange-500/50 transition-all hover:bg-gray-800/80 text-center"
             >
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform mx-auto`}>
                 <link.icon className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-1">{link.label}</h3>
@@ -109,7 +116,7 @@ const CommunitySection = () => {
           ))}
         </div>
 
-        {/* Newsletter */}
+        {/* Newsletter - Único en toda la página */}
         <div className="max-w-xl mx-auto">
           <div className="p-8 rounded-3xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 border border-gray-700/50 backdrop-blur-sm">
             <div className="text-center mb-6">
@@ -117,10 +124,11 @@ const CommunitySection = () => {
                 Newsletter
               </span>
               <h3 className="text-2xl font-bold text-white mb-2">
-                Recibí las novedades
+                Seguí el desarrollo
               </h3>
               <p className="text-gray-400">
-                Enterate primero de nuevos trailers, betas y behind-the-scenes de San José.
+                Enterate primero de trailers, betas y secretos de San José. 
+                Sin spam, solo contenido del juego.
               </p>
             </div>
 
@@ -147,7 +155,7 @@ const CommunitySection = () => {
             </form>
 
             <p className="text-xs text-gray-500 mt-4 text-center">
-              Sin spam. Solo novedades de San José. 🎮
+              Podés darte de baja cuando quieras. 🎮
             </p>
           </div>
         </div>
@@ -156,13 +164,18 @@ const CommunitySection = () => {
         <footer className="mt-24 pt-8 border-t border-gray-800">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-gradient">CrabCode</span>
+              <span className="text-2xl font-bold">
+                <span className="text-gradient">CrabCode</span>{' '}
+                <span className="text-gradient-games animate-glitch inline-block text-2xl">
+                  Games
+                </span>
+              </span>
             </div>
             <p className="text-gray-500 text-sm flex items-center gap-1">
               Hecho con <Heart className="w-4 h-4 text-red-500 fill-red-500" /> en Argentina
             </p>
             <p className="text-gray-600 text-sm">
-              © {new Date().getFullYear()}
+              © {new Date().getFullYear()} CrabCode Games
             </p>
           </div>
         </footer>
