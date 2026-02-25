@@ -4,8 +4,8 @@ import HeroSection from './sections/HeroSection';
 import GamesSection from './sections/GamesSection';
 import AboutSection from './sections/AboutSection';
 import CommunitySection from './sections/CommunitySection';
-import ContactSection from './components/ContactSection';
-import CrabZone from './components/CrabZone'; // <-- NUEVO IMPORT
+import ContactSection from './sections/ContactSection';  // ✅ CAMBIADO
+import CrabZone from './components/CrabZone';
 import './App.css';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <CommunitySection />
       </main>
       
-      {/* ZONA DEL CANGREJO - justo antes del footer */}
+      {/* ZONA DEL CANGREJO */}
       <CrabZone />
       
       {/* Footer */}
