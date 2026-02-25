@@ -4,7 +4,6 @@ import HeroSection from './sections/HeroSection';
 import GamesSection from './sections/GamesSection';
 import AboutSection from './sections/AboutSection';
 import CommunitySection from './sections/CommunitySection';
-import ContactSection from './sections/ContactSection';  // ✅ CAMBIADO
 import CrabZone from './components/CrabZone';
 import './App.css';
 
@@ -26,14 +25,13 @@ function App() {
         <HeroSection />
         <GamesSection />
         <AboutSection />
-        <CommunitySection />
+        <CommunitySection /> {/* Esta sección YA INCLUYE footer con CrabCode Games */}
       </main>
       
       {/* ZONA DEL CANGREJO */}
       <CrabZone />
       
-      {/* Footer */}
-      <ContactSection />
+      {/* 🚫 ELIMINADO: ContactSection ya no se usa */}
     </div>
   );
 }
