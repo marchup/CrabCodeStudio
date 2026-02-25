@@ -152,28 +152,28 @@ const CrabZone = () => {
           </div>
         ))}
 
-        {/* Cangrejo cazador */}
-        <div
-          className="absolute bottom-0 transition-all duration-100 ease-linear"
-          style={{ 
-            left: position,
-            transition: isMoving ? 'left 80ms linear' : 'none'
-          }}
-        >
-          <img
-            src={`/${frame}.gif`}
-            alt="Cangrejo cazando"
-            className="w-20 h-20 object-contain drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]"
-            style={{
-              transform: direction === 1 ? 'scaleX(1)' : 'scaleX(-1)',
-            }}
-          />
-          
-          {/* Brillo cuando "caza" */}
-          {Math.random() > 0.98 && (
-            <div className="absolute -top-2 -right-2 w-4 h-4 bg-orange-500 rounded-full blur-sm animate-ping" />
-          )}
-        </div>
+       {/* Cangrejo cazador */}
+<div
+  className="absolute bottom-0 transition-all duration-100 ease-linear"
+  style={{ 
+    left: position,
+    transition: isMoving ? 'left 80ms linear' : 'none'
+  }}
+>
+  <img
+    src={`/${frame}.gif`}
+    alt="Cangrejo cazando"
+    className="w-20 h-20 object-contain drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]"
+    style={{
+      transform: direction === 1 ? 'scaleX(1)' : 'scaleX(-1)',
+    }}
+  />
+  
+  {/* Brillo cuando "caza" */}
+  {Math.random() > 0.98 && (
+    <div className="absolute -top-2 -right-2 w-4 h-4 bg-orange-500 rounded-full blur-sm animate-ping" />
+  )}
+</div>
 
         {/* Suelo decorativo */}
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
