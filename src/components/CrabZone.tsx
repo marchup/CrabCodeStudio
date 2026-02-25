@@ -8,14 +8,14 @@ const CrabZone = () => {
   const [isMoving, setIsMoving] = useState(true);
   const zoneRef = useRef<HTMLDivElement>(null);
   
-  // Partículas - AHORA CON CEROS Y UNOS
+  // Partículas - CON CEROS Y UNOS
   const [particles, setParticles] = useState<Array<{
     id: number;
     x: number;
     y: number;
     size: number;
     speed: number;
-    value: string; // '0' o '1'
+    value: string;
   }>>([]);
 
   // Animación del cangrejo (15 frames)
@@ -26,13 +26,12 @@ const CrabZone = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Movimiento del cangrejo - MÁS CONTROLADO
+  // Movimiento del cangrejo
   useEffect(() => {
     const zoneWidth = zoneRef.current?.clientWidth || 800;
     const crabWidth = 80;
     const maxPosition = zoneWidth - crabWidth;
     
-    // Generar nueva posición objetivo aleatoria cada 3-6 segundos
     const targetInterval = setInterval(() => {
       const minMove = 80;
       let newTarget;
@@ -88,21 +87,21 @@ const CrabZone = () => {
     return () => clearInterval(moveInterval);
   }, [targetPosition]);
 
-  // Generar partículas - AHORA CON CEROS Y UNOS
+  // Generar partículas
   useEffect(() => {
     const generateParticle = () => {
       const newParticle = {
         id: Date.now() + Math.random(),
         x: Math.random() * (zoneRef.current?.clientWidth || 800),
         y: 40 + Math.random() * 40,
-        size: Math.random() * 14 + 10, // Más grandes para que se vean bien
+        size: Math.random() * 14 + 10,
         speed: Math.random() * 2 + 0.5,
-        value: Math.random() > 0.5 ? '0' : '1', // Aleatorio entre 0 y 1
+        value: Math.random() > 0.5 ? '0' : '1',
       };
       setParticles((prev) => [...prev, newParticle]);
     };
 
-    const interval = setInterval(generateParticle, 400); // Más frecuente
+    const interval = setInterval(generateParticle, 400);
     return () => clearInterval(interval);
   }, []);
 
@@ -133,7 +132,7 @@ const CrabZone = () => {
           🦀 ~ Crab is working ~ 🦀
         </div>
 
-        {/* Partículas - AHORA SON 0s Y 1s */}
+        {/* Partículas - 0s y 1s */}
         {particles.map((p) => (
           <div
             key={p.id}
@@ -152,27 +151,28 @@ const CrabZone = () => {
           </div>
         ))}
 
-       {/* Cangrejo cazador */}
-<div
-  className="absolute bottom-0 transition-all duration-100 ease-linear"
-   style={{
-    transform: direction === 1 ? 'scaleX(-1)' : 'scaleX(1)', // INVERTIDO
-  }}
->
-  <img
-    src={`/${frame}.gif`}
-    alt="Cangrejo cazando"
-    className="w-20 h-20 object-contain drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]"
-    style={{
-      transform: direction === 1 ? 'scaleX(1)' : 'scaleX(-1)',
-    }}
-  />
-  
-  {/* Brillo cuando "caza" */}
-  {Math.random() > 0.98 && (
-    <div className="absolute -top-2 -right-2 w-4 h-4 bg-orange-500 rounded-full blur-sm animate-ping" />
-  )}
-</div>
+        {/* Cangrejo cazador - CORREGIDO */}
+        <div
+          className="absolute bottom-0 transition-all duration-100 ease-linear"
+          style={{ 
+            left: position,  // ← ESTO ES LO QUE FALTABA
+            transition: isMoving ? 'left 80ms linear' : 'none'
+          }}
+        >
+          <img
+            src={`/${frame}.gif`}
+            alt="Cangrejo cazando"
+            className="w-20 h-20 object-contain drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]"
+            style={{
+              transform: direction === 1 ? 'scaleX(1)' : 'scaleX(-1)', // Si mira bien, cambiá a la inversa
+            }}
+          />
+          
+          {/* Brillo cuando "caza" */}
+          {Math.random() > 0.98 && (
+            <div className="absolute -top-2 -right-2 w-4 h-4 bg-orange-500 rounded-full blur-sm animate-ping" />
+          )}
+        </div>
 
         {/* Suelo decorativo */}
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
