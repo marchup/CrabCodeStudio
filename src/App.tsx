@@ -4,6 +4,8 @@ import HeroSection from './sections/HeroSection';
 import GamesSection from './sections/GamesSection';
 import AboutSection from './sections/AboutSection';
 import CommunitySection from './sections/CommunitySection';
+import ContactSection from './components/ContactSection';
+import CrabZone from './components/CrabZone'; // <-- NUEVO IMPORT
 import './App.css';
 
 function App() {
@@ -26,6 +28,12 @@ function App() {
         <AboutSection />
         <CommunitySection />
       </main>
+      
+      {/* ZONA DEL CANGREJO - justo antes del footer */}
+      <CrabZone />
+      
+      {/* Footer */}
+      <ContactSection />
     </div>
   );
 }
