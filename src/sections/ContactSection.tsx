@@ -1,4 +1,4 @@
-import { Mail, Twitter, MessageCircle, Send, MapPin } from 'lucide-react';
+import { Mail, Twitter, MessageCircle, Send } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -62,56 +62,25 @@ const ContactSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-background to-gray-900" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-orange-500/10 rounded-full blur-3xl" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <div>
+      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Newsletter - Ahora ocupa todo el ancho */}
+        <div className="p-8 rounded-3xl bg-gray-800/50 border border-gray-700/50 backdrop-blur-sm mb-12">
+          <div className="text-center mb-8">
             <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-400 text-sm font-medium mb-4">
-              Contacto
+              Newsletter
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Trabajemos <span className="text-gradient">juntos</span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+              Seguí el <span className="text-gradient">desarrollo</span>
             </h2>
-            <p className="text-lg text-gray-400 mb-8">
-              ¿Tenés una idea para un proyecto? ¿Querés colaborar o simplemente 
-              charlar sobre videojuegos? ¡Estoy abierto a nuevas oportunidades!
-            </p>
-
-            {/* Social Links - SIN GITHUB */}
-            <div className="flex flex-wrap gap-4 mb-8">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group flex items-center gap-2 px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-400 transition-all hover:border-orange-500/50 hover:bg-gray-800 ${link.color}`}
-                >
-                  <link.icon className="w-5 h-5" />
-                  <span className="font-medium">{link.label}</span>
-                </a>
-              ))}
-            </div>
-
-            {/* Location */}
-            <div className="flex items-center gap-2 text-gray-500">
-              <MapPin className="w-4 h-4" />
-              <span className="text-sm">Desarrollando desde Argentina</span>
-            </div>
-          </div>
-
-          {/* Right Content - Newsletter */}
-          <div className="p-8 rounded-3xl bg-gray-800/50 border border-gray-700/50 backdrop-blur-sm">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Seguí el desarrollo
-            </h3>
-            <p className="text-gray-400 mb-6">
-              Suscribite para recibir novedades de San José y los próximos proyectos.
+            <p className="text-lg text-gray-400 max-w-xl mx-auto">
+              Enterate primero de trailers, betas y secretos de San José. 
               Sin spam, solo contenido del juego.
             </p>
+          </div>
 
-            <form onSubmit={handleSubscribe} className="space-y-4">
-              <div className="relative">
+          <form onSubmit={handleSubscribe} className="max-w-md mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative flex-1">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
                 <input
                   type="email"
@@ -125,16 +94,36 @@ const ContactSection = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity flex items-center justify-center gap-2 glow-orange disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity flex items-center justify-center gap-2 glow-orange disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
               >
                 <Send className="w-5 h-5" />
                 {isSubmitting ? 'Enviando...' : 'Suscribirme'}
               </button>
-            </form>
-
+            </div>
             <p className="text-xs text-gray-500 mt-4 text-center">
               Podés darte de baja cuando quieras. 🎮
             </p>
+          </form>
+        </div>
+
+        {/* Redes Sociales - Separadas */}
+        <div className="text-center">
+          <h3 className="text-lg font-medium text-gray-300 mb-4">
+            Encontrame en
+          </h3>
+          <div className="flex justify-center gap-4">
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-400 transition-all hover:border-orange-500/50 hover:bg-gray-800 ${link.color}`}
+              >
+                <link.icon className="w-5 h-5" />
+                <span className="font-medium">{link.label}</span>
+              </a>
+            ))}
           </div>
         </div>
 
