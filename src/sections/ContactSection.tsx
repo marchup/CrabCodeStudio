@@ -1,4 +1,4 @@
-import { Github, Mail, Twitter, MessageCircle, Send, MapPin } from 'lucide-react';
+import { Mail, Twitter, MessageCircle, Send, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -7,12 +7,6 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const socialLinks = [
-    {
-      icon: Github,
-      label: 'GitHub',
-      href: 'https://github.com/marchup',
-      color: 'hover:text-white',
-    },
     {
       icon: Twitter,
       label: 'Twitter',
@@ -83,7 +77,7 @@ const ContactSection = () => {
               charlar sobre videojuegos? ¡Estoy abierto a nuevas oportunidades!
             </p>
 
-            {/* Social Links */}
+            {/* Social Links - SIN GITHUB */}
             <div className="flex flex-wrap gap-4 mb-8">
               {socialLinks.map((link) => (
                 <a
@@ -144,14 +138,19 @@ const ContactSection = () => {
           </div>
         </div>
 
-        {/* Footer */}
+        {/* Footer - CON CRABCODE GAMES */}
         <footer className="mt-24 pt-8 border-t border-gray-800">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-gradient">CrabCode</span>
+              <span className="text-2xl font-bold">
+                <span className="text-gradient">CrabCode</span>{' '}
+                <span className="text-gradient-games animate-glitch inline-block text-2xl">
+                  Games
+                </span>
+              </span>
             </div>
             <p className="text-gray-500 text-sm">
-              © {new Date().getFullYear()} CrabCode. Todos los derechos reservados.
+              © {new Date().getFullYear()} CrabCode Games. Todos los derechos reservados.
             </p>
             <div className="flex items-center gap-4">
               <a href="#" className="text-gray-500 hover:text-orange-400 text-sm transition-colors">
