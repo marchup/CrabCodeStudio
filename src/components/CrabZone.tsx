@@ -18,6 +18,8 @@ const CrabZone = () => {
     value: string;
   }>>([]);
 
+  const MAX_PARTICLES = 30; // Límite máximo de partículas visibles
+
   // Animación del cangrejo (15 frames)
   useEffect(() => {
     const interval = setInterval(() => {
@@ -87,36 +89,51 @@ const CrabZone = () => {
     return () => clearInterval(moveInterval);
   }, [targetPosition]);
 
-  // Generar partículas
+  // Generar partículas - CON LÍMITE MÁXIMO
   useEffect(() => {
     const generateParticle = () => {
-      const newParticle = {
-        id: Date.now() + Math.random(),
-        x: Math.random() * (zoneRef.current?.clientWidth || 800),
-        y: 40 + Math.random() * 40,
-        size: Math.random() * 14 + 10,
-        speed: Math.random() * 2 + 0.5,
-        value: Math.random() > 0.5 ? '0' : '1',
-      };
-      setParticles((prev) => [...prev, newParticle]);
+      setParticles((prev) => {
+        // Si ya llegamos al límite, no agregamos más
+        if (prev.length >= MAX_PARTICLES) {
+          return prev;
+        }
+        
+        const newParticle = {
+          id: Date.now() + Math.random(),
+          x: Math.random() * (zoneRef.current?.clientWidth || 800),
+          y: 40 + Math.random() * 40,
+          size: Math.random() * 14 + 10,
+          speed: Math.random() * 2 + 0.5,
+          value: Math.random() > 0.5 ? '0' : '1',
+        };
+        return [...prev, newParticle];
+      });
     };
 
     const interval = setInterval(generateParticle, 400);
     return () => clearInterval(interval);
   }, []);
 
-  // Animar partículas
+  // Animar partículas y mantener límite
   useEffect(() => {
     const animate = setInterval(() => {
-      setParticles((prev) => 
-        prev
+      setParticles((prev) => {
+        // Animar y filtrar las que salen de la pantalla
+        const animated = prev
           .map((p) => ({
             ...p,
             y: p.y - p.speed * 0.4,
             x: p.x + Math.sin(p.y * 0.1) * 0.5,
           }))
-          .filter((p) => p.y > -30)
-      );
+          .filter((p) => p.y > -30);
+        
+        // Si después del filtro aún superamos el límite, eliminamos las más viejas
+        if (animated.length > MAX_PARTICLES) {
+          return animated.slice(-MAX_PARTICLES);
+        }
+        
+        return animated;
+      });
     }, 50);
     return () => clearInterval(animate);
   }, []);
@@ -175,7 +192,7 @@ const CrabZone = () => {
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
       </div>
 
-      {/* Texto sutil - AHORA SÍ ABAJO DE TODO */}
+      {/* Texto sutil - ABAJO DE TODO */}
       <div className="absolute bottom-2 left-0 w-full text-center text-xs text-orange-500/30 font-mono">
         🦀 ~ Crab is working ~ 🦀
       </div>
