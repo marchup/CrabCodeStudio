@@ -122,12 +122,12 @@ const CrabZone = () => {
   }, []);
 
   return (
-    <div className="relative w-full bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent py-8 overflow-hidden border-t border-orange-500/20">
+    <div className="relative w-full bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent pt-6 pb-12 overflow-hidden border-t border-orange-500/20">
       <div 
         ref={zoneRef}
         className="relative h-28 mx-auto max-w-5xl px-4"
       >
-        {/* Partículas - 0s y 1s (arriba) */}
+        {/* Partículas - 0s y 1s */}
         {particles.map((p) => (
           <div
             key={p.id}
@@ -140,20 +140,20 @@ const CrabZone = () => {
               filter: 'drop-shadow(0 0 4px #f97316)',
               opacity: 0.8 + Math.sin(p.y * 0.1) * 0.2,
               textShadow: '0 0 8px rgba(249,115,22,0.5)',
-              zIndex: 10, // Partículas arriba
+              zIndex: 10,
             }}
           >
             {p.value}
           </div>
         ))}
 
-        {/* Cangrejo cazador (medio) */}
+        {/* Cangrejo cazador */}
         <div
           className="absolute bottom-0 transition-all duration-100 ease-linear"
           style={{ 
             left: position,
             transition: isMoving ? 'left 80ms linear' : 'none',
-            zIndex: 20, // Cangrejo encima de partículas
+            zIndex: 20,
           }}
         >
           <img
@@ -175,8 +175,8 @@ const CrabZone = () => {
         <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500/30 to-transparent" />
       </div>
 
-      {/* Texto sutil - AHORA ABAJO DEL CANGREJO */}
-      <div className="text-center mt-2 text-xs text-orange-500/30 font-mono">
+      {/* Texto sutil - AHORA SÍ ABAJO DE TODO */}
+      <div className="absolute bottom-2 left-0 w-full text-center text-xs text-orange-500/30 font-mono">
         🦀 ~ Crab is working ~ 🦀
       </div>
     </div>
