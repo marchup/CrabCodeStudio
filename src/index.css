@@ -298,3 +298,69 @@
 .crab-logo-container:hover::after {
   opacity: 0.3;
 }
+
+/* ===== NUEVOS ESTILOS PARA "GAMES" ===== */
+
+/* Efecto especial para Games */
+.text-gradient-games {
+  background: linear-gradient(
+    135deg,
+    #f97316 0%,
+    #dc2626 25%,
+    #fbbf24 50%,
+    #dc2626 75%,
+    #f97316 100%
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 4s linear infinite;
+  text-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 300% center;
+  }
+}
+
+@keyframes glitch {
+  0%, 95%, 100% { 
+    transform: translate(0);
+    filter: none;
+  }
+  96% { 
+    transform: translate(-1px, 1px);
+    filter: hue-rotate(90deg);
+  }
+  97% { 
+    transform: translate(1px, -1px);
+    filter: hue-rotate(-90deg);
+  }
+  98% { 
+    transform: translate(-1px, 0px);
+    filter: brightness(1.2);
+  }
+  99% { 
+    transform: translate(1px, 1px);
+    filter: brightness(1.2);
+  }
+}
+
+.animate-glitch {
+  animation: glitch 8s ease infinite;
+}
+
+/* Mejorar el text-gradient existente */
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, #f97316 50%, #fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 6s linear infinite;
+}
