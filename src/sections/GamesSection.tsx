@@ -1,6 +1,32 @@
 import { ExternalLink, Youtube, Instagram } from 'lucide-react';
 import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+
+// Diálogo personalizado (reemplaza la importación faltante)
+const SimpleDialog = ({ 
+  isOpen, 
+  onClose, 
+  children 
+}: { 
+  isOpen: boolean; 
+  onClose: () => void; 
+  children: React.ReactNode;
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <>
+      {/* Overlay */}
+      <div 
+        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+        onClick={onClose}
+      />
+      {/* Dialog Content */}
+      <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md">
+        {children}
+      </div>
+    </>
+  );
+};
 
 const GamesSection = () => {
   const [showDialog, setShowDialog] = useState(false);
@@ -14,13 +40,13 @@ const GamesSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-400 text-sm font-medium mb-4">
-            Nuestros Juegos
+            Mis Juegos
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
             Experiencias para <span className="text-gradient">jugar</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Cada proyecto es una nueva aventura. Descubre lo que estamos creando.
+            Cada proyecto es una nueva aventura. Descubrí lo que estoy creando.
           </p>
         </div>
 
@@ -94,8 +120,8 @@ const GamesSection = () => {
                 Próximo Proyecto
               </h3>
               <p className="text-gray-500 text-center text-sm">
-                Tenemos más ideas en el horno. 
-                ¡Mantente atento!
+                Tengo nuevas ideas en desarrollo. Cada proyecto busca sorprender y emocionar. 
+                ¡Seguí el camino de San José y lo que viene!
               </p>
             </div>
           </div>
@@ -106,7 +132,7 @@ const GamesSection = () => {
           {[
             {
               title: 'Narrativa',
-              desc: 'Historias que te atrapan desde el primer minuto.',
+              desc: 'Historias que te atrapan desde el primer minuto, donde tus decisiones importan y cada descubrimiento deja huella.',
             },
             {
               title: 'Gameplay',
@@ -128,21 +154,21 @@ const GamesSection = () => {
         </div>
       </div>
 
-      {/* Dialog */}
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="bg-gray-900 border-gray-700 text-white max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-gradient">
+      {/* Diálogo personalizado */}
+      <SimpleDialog isOpen={showDialog} onClose={() => setShowDialog(false)}>
+        <div className="bg-gray-900 border border-gray-700 rounded-xl p-6 text-white">
+          <div className="text-center mb-4">
+            <h3 className="text-2xl font-bold text-gradient mb-2">
               San José está en desarrollo
-            </DialogTitle>
-            <DialogDescription className="text-gray-400">
-              Estamos trabajando día a día para traerte una experiencia increíble.
+            </h3>
+            <p className="text-gray-400">
+              Estoy trabajando día a día para traerte una experiencia increíble.
               <br /><br />
-              Seguinos en YouTube e Instagram para ver el progreso, trailers y behind-the-scenes.
+              Seguime en YouTube e Instagram para ver el progreso, trailers y behind-the-scenes.
               <br /><br />
               ¡Gracias por tu apoyo!
-            </DialogDescription>
-          </DialogHeader>
+            </p>
+          </div>
           <div className="flex flex-col gap-3 mt-4">
             <a
               href="https://youtube.com/@sanjosegame"
@@ -169,8 +195,8 @@ const GamesSection = () => {
               Cerrar
             </button>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      </SimpleDialog>
     </section>
   );
 };
