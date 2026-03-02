@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { Sparkles, ChevronDown } from 'lucide-react';
-import CrabLogo from '../components/CrabLogo';
+// 1. Importamos tu nuevo logo
+import logoFinal from '../assets/images/LogoFdoTransparente.png';
+
+// 2. Ya no necesitamos importar el componente CrabLogo
+// import CrabLogo from '../components/CrabLogo'; 
 
 const HeroSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -120,9 +124,14 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
-        {/* Logo - Crab Mascot - TAMAÑO AUMENTADO A 180 */}
+        {/* 3. Reemplazamos el componente CrabLogo por tu imagen */}
         <div className="mb-6 animate-fade-in flex justify-center">
-          <CrabLogo size={180} animated />
+          <img 
+            src={logoFinal} 
+            alt="Logo de CrabCodeStudio" 
+            className="max-w-xs h-auto" // Usamos clases de Tailwind para el tamaño
+            style={{ maxHeight: '180px' }} // Forzamos una altura máxima para que no sea demasiado grande
+          />
         </div>
 
         {/* Badge */}
