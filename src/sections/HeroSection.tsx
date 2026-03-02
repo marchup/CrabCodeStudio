@@ -1,12 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Sparkles, ChevronDown } from 'lucide-react';
-// 1. Importamos tu nuevo logo
+// 1. Importamos el logo final
 import logoFinal from '../assets/images/LogoFdoTransparente.png';
 
-// 2. Ya no necesitamos importar el componente CrabLogo
-// import CrabLogo from '../components/CrabLogo'; 
+// 2. Ya no importamos CrabLogo
 
 const HeroSection = () => {
+  // 3. Añadimos la lógica para la animación de clic
+  const [isLogoClicked, setIsLogoClicked] = useState(false);
+
+  const handleLogoClick = () => {
+    setIsLogoClicked(true);
+    // Reseteamos la animación después de 600ms (igual que el original)
+    setTimeout(() => setIsLogoClicked(false), 600);
+  };
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -23,7 +31,6 @@ const HeroSection = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Pixel particles for retro gaming feel - AUMENTADAS a 120 partículas
     const particles: Array<{
       x: number;
       y: number;
@@ -36,16 +43,15 @@ const HeroSection = () => {
 
     const colors = ['#f97316', '#dc2626', '#fb923c', '#fca5a5', '#ff8c42', '#e65c1e'];
 
-    // MÁS PARTÍCULAS: aumentamos de 60 a 120
     for (let i = 0; i < 120; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 1.2, // Un poco más de movimiento
+        vx: (Math.random() - 0.5) * 1.2,
         vy: (Math.random() - 0.5) * 1.2,
-        size: Math.random() > 0.6 ? 4 : 2, // Más partículas grandes (40% en vez de 30%)
+        size: Math.random() > 0.6 ? 4 : 2,
         color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.7 + 0.3, // Más visibles (mínimo 0.3 en vez de 0.2)
+        alpha: Math.random() * 0.7 + 0.3,
       });
     }
 
@@ -54,9 +60,8 @@ const HeroSection = () => {
 
     const animate = () => {
       frameCount++;
-      // Render every 2nd frame for performance (30fps)
       if (frameCount % 2 === 0) {
-        ctx.fillStyle = 'rgba(17, 20, 28, 0.1)'; // Más sutil el fade para que las partículas duren más
+        ctx.fillStyle = 'rgba(17, 20, 28, 0.1)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         particles.forEach((particle) => {
@@ -100,47 +105,47 @@ const HeroSection = () => {
 
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Canvas */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0"
         style={{ background: 'linear-gradient(180deg, #0d0f15 0%, #11141c 50%, #0d0f15 100%)' }}
       />
 
-      {/* Grid overlay for retro feel */}
       <div 
-        className="absolute inset-0 z-[1] opacity-[0.05]" // Aumentado ligeramente para que se note más
+        className="absolute inset-0 z-[1] opacity-[0.05]"
         style={{
           backgroundImage: `
             linear-gradient(rgba(249, 115, 22, 0.5) 1px, transparent 1px),
             linear-gradient(90deg, rgba(249, 115, 22, 0.5) 1px, transparent 1px)
           `,
-          backgroundSize: '40px 40px' // Grid más denso
+          backgroundSize: '40px 40px'
         }}
       />
 
-      {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background z-[2]" />
 
-      {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
-        {/* 3. Reemplazamos el componente CrabLogo por tu imagen */}
+        {/* 4. Reemplazamos el CrabLogo por nuestra imagen con animación */}
         <div className="mb-6 animate-fade-in flex justify-center">
-          <img 
-            src={logoFinal} 
-            alt="Logo de CrabCodeStudio" 
-            className="max-w-xs h-auto" // Usamos clases de Tailwind para el tamaño
-            style={{ maxHeight: '180px' }} // Forzamos una altura máxima para que no sea demasiado grande
+          <img
+            src={logoFinal}
+            alt="Logo de CrabCodeStudio"
+            // Usamos clases de Tailwind para el tamaño y la animación
+            className={`transition-transform duration-300 ${isLogoClicked ? 'scale-75' : 'scale-100'}`}
+            style={{ 
+              width: '180px', 
+              height: '180px',
+              cursor: 'pointer' // Indica que se puede hacer clic
+            }}
+            onClick={handleLogoClick}
           />
         </div>
 
-        {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/30 mb-6">
           <Sparkles className="w-4 h-4 text-orange-400" />
           <span className="text-sm text-orange-300 font-medium">Indie Game Studio</span>
         </div>
 
-        {/* Title - AHORA CON "Games" DESTACADO */}
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6">
           <span className="text-gradient">CrabCode</span>{' '}
           <span className="text-gradient-games animate-glitch inline-block">
@@ -148,18 +153,15 @@ const HeroSection = () => {
           </span>
         </h1>
 
-        {/* Tagline */}
         <p className="text-xl sm:text-2xl md:text-3xl text-gray-300 mb-4 font-light">
           historias y aventuras para jugar
         </p>
 
-        {/* Description - AHORA EN PRIMERA PERSONA */}
         <p className="text-base text-gray-500 max-w-xl mx-auto mb-10">
           Soy un desarrollador indie de Argentina. Creo juegos con alma, 
           donde cada pixel cuenta una historia.
         </p>
 
-        {/* CTA Button */}
         <button
           onClick={scrollToGames}
           className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl font-semibold text-white overflow-hidden transition-all hover:scale-105 glow-orange"
@@ -169,12 +171,10 @@ const HeroSection = () => {
           </span>
         </button>
 
-        {/* Floating decorative elements */}
         <div className="absolute -left-32 top-1/3 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute -right-32 bottom-1/3 w-80 h-80 bg-red-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
-      {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
         <button onClick={scrollToGames} className="text-orange-500/50 hover:text-orange-400 transition-colors">
           <ChevronDown className="w-8 h-8" />
