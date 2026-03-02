@@ -1,17 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Sparkles, ChevronDown } from 'lucide-react';
-// 1. Importamos el logo final
-import logoFinal from '../assets/images/LogoFdoTransparente.png';
 
-// 2. Ya no importamos CrabLogo
+// 1. Ya NO importamos el logo. La línea "import logoFinal..." se elimina.
+// import logoFinal from '../assets/images/LogoFdoTransparente.png'; <-- BORRAR ESTA LÍNEA
 
 const HeroSection = () => {
-  // 3. Añadimos la lógica para la animación de clic
+  // 2. La lógica de la animación se mantiene igual
   const [isLogoClicked, setIsLogoClicked] = useState(false);
 
   const handleLogoClick = () => {
     setIsLogoClicked(true);
-    // Reseteamos la animación después de 600ms (igual que el original)
     setTimeout(() => setIsLogoClicked(false), 600);
   };
 
@@ -125,17 +123,16 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background z-[2]" />
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
-        {/* 4. Reemplazamos el CrabLogo por nuestra imagen con animación */}
+        {/* 3. Usamos la ruta absoluta desde la raíz en el atributo src */}
         <div className="mb-6 animate-fade-in flex justify-center">
           <img
-            src={logoFinal}
+            src="/images/LogoFdoTransparente.png" // <-- ¡LA RUTA CLAVE!
             alt="Logo de CrabCodeStudio"
-            // Usamos clases de Tailwind para el tamaño y la animación
             className={`transition-transform duration-300 ${isLogoClicked ? 'scale-75' : 'scale-100'}`}
             style={{ 
               width: '180px', 
               height: '180px',
-              cursor: 'pointer' // Indica que se puede hacer clic
+              cursor: 'pointer'
             }}
             onClick={handleLogoClick}
           />
