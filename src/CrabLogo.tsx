@@ -47,32 +47,29 @@ const CrabLogo = ({ size = 100, animated = true, className = '' }: CrabLogoProps
       style={{ width: size, height: size }}
       onClick={handleClick}
     >
-      {/* Imagen principal del cangrejo - CON FILTRO PARA ELIMINAR FONDO NEGRO */}
+      {/* Imagen principal del cangrejo - AHORA USA EL NUEVO LOGO */}
       <img
-        src="/crab-mascot.png"
+        src="/LogoFdoTransparente.png"
         alt="CrabCode Mascot"
         className={`w-full h-full object-contain relative z-10 ${
           isGlitching ? 'opacity-90' : 'opacity-100'
         }`}
         style={{
-          // IMPORTANTE: Estos filtros eliminan el fondo negro
-          filter: isGlitching 
-            ? 'brightness(1.2) contrast(1.2) saturate(1.5) url(#glitch)' 
-            : 'brightness(1.1) contrast(1.1)',
-          mixBlendMode: 'screen', // Esto hace mágica con fondos negros
+          // Como el PNG ya tiene fondo transparente, solo aplicamos glitch
+          filter: isGlitching ? 'url(#glitch)' : 'none',
         }}
       />
 
-      {/* Capas de glitch (solo visibles durante el efecto) */}
+      {/* Capas de glitch (solo visibles durante el efecto) - TAMBIÉN USAN EL NUEVO LOGO */}
       {isGlitching && (
         <>
           {/* Capa roja desplazada */}
           <img
-            src="/crab-mascot.png"
+            src="/LogoFdoTransparente.png"
             alt=""
             className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
             style={{
-              mixBlendMode: 'screen',
+              mixBlendMode: 'multiply',
               opacity: 0.4,
               filter: 'brightness(1.5) sepia(1) hue-rotate(-50deg) saturate(10)',
               transform: 'translate(4px, -2px)',
@@ -83,11 +80,11 @@ const CrabLogo = ({ size = 100, animated = true, className = '' }: CrabLogoProps
           
           {/* Capa azul desplazada */}
           <img
-            src="/crab-mascot.png"
+            src="/LogoFdoTransparente.png"
             alt=""
             className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
             style={{
-              mixBlendMode: 'screen',
+              mixBlendMode: 'multiply',
               opacity: 0.4,
               filter: 'brightness(1.5) sepia(1) hue-rotate(150deg) saturate(10)',
               transform: 'translate(-4px, 2px)',
