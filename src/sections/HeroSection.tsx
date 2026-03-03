@@ -115,7 +115,7 @@ const HeroSection = () => {
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
         {/* Logo - AHORA USA EL COMPONENTE CRABLOGO CON TODAS SUS ANIMACIONES */}
         <div className="mb-6 animate-fade-in flex justify-center">
-          <CrabLogo size={180} animated />
+          <CrabLogo size={250} animated />
         </div>
 
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/30 mb-6">
