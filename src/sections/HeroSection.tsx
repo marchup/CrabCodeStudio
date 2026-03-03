@@ -1,14 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Sparkles, ChevronDown } from 'lucide-react';
+import CrabLogo from '../components/CrabLogo'; // IMPORTAMOS EL COMPONENTE
 
 const HeroSection = () => {
-  const [isLogoClicked, setIsLogoClicked] = useState(false);
-
-  const handleLogoClick = () => {
-    setIsLogoClicked(true);
-    setTimeout(() => setIsLogoClicked(false), 600);
-  };
-
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -119,19 +113,9 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background z-[2]" />
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
-        {/* Logo - RUTA CORREGIDA (sin /images/) */}
+        {/* Logo - AHORA USA EL COMPONENTE CRABLOGO CON TODAS SUS ANIMACIONES */}
         <div className="mb-6 animate-fade-in flex justify-center">
-          <img
-            src="/LogoFdoTransparente.png"
-            alt="CrabCode Mascot"
-            className={`transition-transform duration-300 ${isLogoClicked ? 'scale-75' : 'scale-100'}`}
-            style={{ 
-              width: '180px', 
-              height: '180px',
-              cursor: 'pointer'
-            }}
-            onClick={handleLogoClick}
-          />
+          <CrabLogo size={180} animated />
         </div>
 
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/30 mb-6">
