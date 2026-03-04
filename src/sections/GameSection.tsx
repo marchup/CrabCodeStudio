@@ -64,20 +64,20 @@ const GamesSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-400 text-sm font-medium mb-4">
-            Mis Juegos
+            Mi Primer Juego
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Experiencias para <span className="text-gradient">jugar</span>
+            San José <span className="text-gradient">Echoes from the Abyss</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Cada proyecto es una nueva aventura. Descubrí lo que estoy creando.
+            Un mar oscuro, un padre desaparecido, un misterio que desafía el tiempo.
           </p>
         </div>
 
-        {/* Games Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* San José - Carrusel de capturas */}
-          <div className="md:col-span-2 lg:col-span-2 group relative">
+        {/* Games Grid - AHORA UNA SOLA COLUMNA PARA SAN JOSÉ */}
+        <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+          {/* San José - Carrusel de capturas (ocupa todo el ancho) */}
+          <div className="group relative">
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 group-hover:border-orange-500/50 transition-all">
               
               {/* Carrusel de imágenes */}
@@ -136,67 +136,53 @@ const GamesSection = () => {
                 </span>
               </div>
             </div>
+          </div>
 
-            {/* Información del juego (debajo de la imagen) */}
-            <div className="mt-4">
-              <h3 className="text-2xl font-bold text-white mb-2">San José</h3>
-              <p className="text-gray-400 text-sm mb-3">
-                Echoes from the Abyss. Una aventura que te llevará a explorar mundos llenos de misterio y emoción.
-              </p>
-              <div className="flex gap-3">
+          {/* Información y botones - AHORA DEBAJO EN SU PROPIA TARJETA */}
+          <div className="bg-gray-800/30 border border-gray-700/30 rounded-2xl p-8 hover:border-orange-500/30 transition-all">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-white mb-3">San José</h3>
+                <p className="text-gray-400 text-base leading-relaxed">
+                  Echoes from the Abyss. Una aventura que te llevará a explorar mundos 
+                  llenos de misterio y emoción. Un padre desaparecido, un secreto que 
+                  espera ser descubierto en las profundidades.
+                </p>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => setShowDialog(true)}
-                  className="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2"
+                  className="px-5 py-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl text-white font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 whitespace-nowrap"
                 >
-                  <ExternalLink className="w-4 h-4" />
+                  <ExternalLink className="w-5 h-5" />
                   Ver más
                 </button>
                 <a
                   href="https://youtube.com/@sanjosegame"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-red-600/90 hover:bg-red-500 rounded-lg text-white text-sm font-medium transition-all flex items-center gap-2"
+                  className="px-5 py-3 bg-red-600/90 hover:bg-red-500 rounded-xl text-white font-medium transition-all flex items-center justify-center gap-2"
                 >
-                  <Youtube className="w-4 h-4" />
+                  <Youtube className="w-5 h-5" />
                   YouTube
                 </a>
                 <a
                   href="https://instagram.com/sanjosegame"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-90 rounded-lg text-white text-sm font-medium transition-all flex items-center gap-2"
+                  className="px-5 py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-90 rounded-xl text-white font-medium transition-all flex items-center justify-center gap-2"
                 >
-                  <Instagram className="w-4 h-4" />
+                  <Instagram className="w-5 h-5" />
                   Instagram
                 </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Próximo Proyecto - Versión mejorada */}
-          <div className="group">
-            <div className="relative h-full min-h-[320px] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/30 border-dashed group-hover:border-orange-500/30 transition-all flex flex-col items-center justify-center p-8 text-center">
-              <div className="w-20 h-20 rounded-xl bg-gray-800 flex items-center justify-center mb-6 group-hover:bg-orange-500/10 transition-colors group-hover:scale-110 duration-300">
-                <span className="text-4xl">🎮</span>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors">
-                Próximo Proyecto
-              </h3>
-              <p className="text-gray-400 text-base max-w-xs">
-                Tengo nuevas ideas en desarrollo. Cada proyecto busca sorprender y emocionar. 
-                ¡Seguí el camino de San José y lo que viene!
-              </p>
-              
-              {/* Efecto de "próximamente" */}
-              <div className="absolute bottom-4 right-4 px-3 py-1 bg-orange-500/20 rounded-full border border-orange-500/30">
-                <span className="text-xs text-orange-400">Próximamente</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Features */}
-        <div className="grid sm:grid-cols-3 gap-6 mt-16">
+        <div className="grid sm:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
           {[
             {
               title: 'Narrativa',
