@@ -30,13 +30,13 @@ const GameSection = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
 
-  // Simulamos 5 capturas del juego (después las reemplazás con las reales)
+  // ✅ AHORA USA TUS IMÁGENES REALES
   const screenshots = [
-    'public/sanjose-screenshot.png',
-    'public/sanjose-screenshot2.png',
-    '/sanjose-3.jpg',
-    '/sanjose-4.jpg',
-    '/sanjose-5.jpg',
+    '/sanjose-screenshot.png',
+    '/sanjose-screenshot2.png',
+    // Cuando agregues más, simplemente agregalas acá:
+    // '/sanjose-screenshot3.png',
+    // '/sanjose-screenshot4.png',
   ];
 
   // Carrusel automático cada 4 segundos
@@ -138,7 +138,7 @@ const GameSection = () => {
             </div>
           </div>
 
-          {/* TEXTO Y BOTONES - FUERA DE LA IMAGEN, EN SU PROPIA CAJA */}
+          {/* TEXTO Y BOTONES - FUERA DE LA IMAGEN */}
           <div className="bg-gray-800/30 border border-gray-700/30 rounded-2xl p-8 hover:border-orange-500/30 transition-all">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div className="flex-1">
