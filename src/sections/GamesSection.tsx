@@ -35,8 +35,10 @@ const GameSection = () => {
     '/sanjose-screenshot.png',
     '/sanjose-screenshot2.png',
     // Cuando agregues más, simplemente agregalas acá:
-    // '/sanjose-screenshot3.png',
-    // '/sanjose-screenshot4.png',
+    '/sanjose-screenshot3.png',
+    '/sanjose-screenshot4.png',
+    '/sanjose-screenshot5.png',
+    '/sanjose-screenshot6.png',
   ];
 
   // Carrusel automático cada 4 segundos
