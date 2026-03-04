@@ -30,15 +30,14 @@ const GameSection = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
 
-  // ✅ AHORA USA TUS IMÁGENES REALES
+  // ✅ RUTAS CORREGIDAS (sin "public/", solo "/")
   const screenshots = [
-    'public/sanjose-screenshot.png',
-    'public/sanjose-screenshot2.png',
-    // Cuando agregues más, simplemente agregalas acá:
-    'public/sanjose-screenshot3.png',
-    'public/sanjose-screenshot4.png',
-    'public/sanjose-screenshot5.png',
-    'public/sanjose-screenshot6.png',
+    '/sanjose-screenshot.png',
+    '/sanjose-screenshot2.png',
+    '/sanjose-screenshot3.png',
+    '/sanjose-screenshot4.png',
+    '/sanjose-screenshot5.png',
+    '/sanjose-screenshot6.png',
   ];
 
   // Carrusel automático cada 4 segundos
