@@ -38,6 +38,7 @@ const GameSection = () => {
     '/sanjose-screenshot4.png',
     '/sanjose-screenshot5.png',
     '/sanjose-screenshot6.png',
+    '/sanjose-screenshot7.png',
   ];
 
   // Carrusel automático cada 4 segundos
