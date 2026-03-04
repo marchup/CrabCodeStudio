@@ -32,8 +32,8 @@ const GameSection = () => {
 
   // Simulamos 5 capturas del juego (después las reemplazás con las reales)
   const screenshots = [
-    '/sanjose-1.jpg',
-    '/sanjose-2.jpg',
+    'public/sanjose-screenshot.png',
+    'public/sanjose-screenshot2.png',
     '/sanjose-3.jpg',
     '/sanjose-4.jpg',
     '/sanjose-5.jpg',
