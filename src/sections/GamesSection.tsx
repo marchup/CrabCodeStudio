@@ -32,13 +32,13 @@ const GameSection = () => {
 
   // ✅ AHORA USA TUS IMÁGENES REALES
   const screenshots = [
-    '/sanjose-screenshot.png',
-    '/sanjose-screenshot2.png',
+    'public/sanjose-screenshot.png',
+    'public/sanjose-screenshot2.png',
     // Cuando agregues más, simplemente agregalas acá:
-    '/sanjose-screenshot3.png',
-    '/sanjose-screenshot4.png',
-    '/sanjose-screenshot5.png',
-    '/sanjose-screenshot6.png',
+    'public/sanjose-screenshot3.png',
+    'public/sanjose-screenshot4.png',
+    'public/sanjose-screenshot5.png',
+    'public/sanjose-screenshot6.png',
   ];
 
   // Carrusel automático cada 4 segundos
