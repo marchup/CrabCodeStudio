@@ -30,7 +30,7 @@ const GameSection = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
 
-  // ✅ RUTAS CORREGIDAS (sin "public/", solo "/")
+  // ✅ RUTAS CORREGIDAS
   const screenshots = [
     '/sanjose-screenshot.png',
     '/sanjose-screenshot2.png',
@@ -38,7 +38,6 @@ const GameSection = () => {
     '/sanjose-screenshot4.png',
     '/sanjose-screenshot5.png',
     '/sanjose-screenshot6.png',
-    '/sanjose-screenshot7.png',
   ];
 
   // Carrusel automático cada 4 segundos
@@ -72,13 +71,13 @@ const GameSection = () => {
             <span className="text-gradient">Echoes from the Abyss</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Un mar que esconde secretos, un padre desaparecido, un misterio que desafía el tiempo.
+            Un mar oscuro, un padre desaparecido, un misterio que desafía el tiempo.
           </p>
         </div>
 
         {/* Contenedor principal - SOLO EL CARRUSEL */}
         <div className="max-w-4xl mx-auto">
-          {/* Carrusel de capturas (SIN TEXTO NI BOTONES DENTRO) */}
+          {/* Carrusel de capturas */}
           <div className="group relative mb-8">
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 group-hover:border-orange-500/50 transition-all">
               
@@ -96,7 +95,7 @@ const GameSection = () => {
                 ))}
               </div>
 
-              {/* Gradiente superpuesto (sutil, solo para que se vean bien los controles) */}
+              {/* Gradiente superpuesto */}
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent" />
 
               {/* Controles del carrusel */}
@@ -128,7 +127,7 @@ const GameSection = () => {
                 ))}
               </div>
 
-              {/* Badges superiores (únicos elementos dentro de la imagen) */}
+              {/* Badges superiores */}
               <div className="absolute top-4 left-4 flex gap-2">
                 <span className="px-3 py-1 rounded-full bg-orange-500/90 text-white text-xs font-medium">
                   En Desarrollo
@@ -140,23 +139,22 @@ const GameSection = () => {
             </div>
           </div>
 
-          {/* TEXTO Y BOTONES - FUERA DE LA IMAGEN */}
+          {/* TEXTO Y BOTONES */}
           <div className="bg-gray-800/30 border border-gray-700/30 rounded-2xl p-8 hover:border-orange-500/30 transition-all">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-white mb-3">San José</h3>
                 <p className="text-gray-400 text-base leading-relaxed">
-                  Echoes from the Abyss. 
-                  Explorá un océano vivo y desafiante.
-                  SeguÍ las pistas de tu padre desaparecido y descubrí
-                  el secreto que aguarda en las profundidades.
+                  Echoes from the Abyss. Una aventura que te llevará a explorar mundos 
+                  llenos de misterio y emoción. Un padre desaparecido, un secreto que 
+                  espera ser descubierto en las profundidades.
                 </p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={() => setShowDialog(true)}
-                  className="px-5 py-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl text-white font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 whitespace-nowrap"
+                  className="px-5 py-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl text-white font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
                 >
                   <ExternalLink className="w-5 h-5" />
                   Ver más
@@ -184,30 +182,41 @@ const GameSection = () => {
           </div>
         </div>
 
-        {/* Features */}
-        <div className="grid sm:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
-          {[
-            {
-              title: 'Narrativa',
-              desc: 'Historias que te atrapan desde el primer minuto, donde tus decisiones importan y cada descubrimiento deja huella.',
-            },
-            {
-              title: 'Gameplay',
-              desc: 'Mecánicas divertidas y adictivas.',
-            },
-            {
-              title: 'Arte',
-              desc: 'Estilo visual único y memorable.',
-            },
-          ].map((feature) => (
-            <div
-              key={feature.title}
-              className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all"
-            >
-              <h4 className="text-lg font-semibold text-white mb-2">{feature.title}</h4>
-              <p className="text-gray-400 text-sm">{feature.desc}</p>
-            </div>
-          ))}
+        {/* FEATURES - CON LOS NUEVOS TEXTOS ✨ */}
+        <div className="grid sm:grid-cols-3 gap-6 mt-16 max-w-6xl mx-auto">
+          {/* Narrativa */}
+          <div className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all group">
+            <h4 className="text-lg font-semibold text-white mb-3 group-hover:text-orange-400 transition-colors">
+              Narrativa
+            </h4>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Una historia íntima atravesada por el misterio y la ciencia, donde cada hallazgo 
+              revela una nueva capa del océano… y de tu pasado.
+            </p>
+          </div>
+
+          {/* Gameplay */}
+          <div className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all group">
+            <h4 className="text-lg font-semibold text-white mb-3 group-hover:text-orange-400 transition-colors">
+              Gameplay
+            </h4>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Exploración, pesca y experimentación científica nacidas de vivencias reales en el mar, 
+              donde cada recurso y cada decisión tienen propósito.
+            </p>
+          </div>
+
+          {/* Arte */}
+          <div className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all group">
+            <h4 className="text-lg font-semibold text-white mb-3 group-hover:text-orange-400 transition-colors">
+              Arte
+            </h4>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Una identidad visual guiada por el amor al mar, que no busca copiar la realidad, 
+              sino transmitir emoción, misterio y el profundo vínculo humano con el océano, 
+              priorizando la atmósfera por sobre el realismo técnico.
+            </p>
+          </div>
         </div>
       </div>
 
