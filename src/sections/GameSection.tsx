@@ -1,169 +1,272 @@
-import { useState } from 'react';
-import { Gamepad2, Monitor, Cpu, Calendar, ExternalLink } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { ExternalLink, Youtube, Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-const GameSection = () => {
-  const [showDialog, setShowDialog] = useState(false);
-
-  const features = [
-    {
-      icon: Gamepad2,
-      title: 'Gameplay Inmersivo',
-      description: 'Mecánicas diseñadas para mantenerte enganchado desde el primer momento.',
-    },
-    {
-      icon: Monitor,
-      title: 'Visual Único',
-      description: 'Estilo artístico distintivo que da vida al mundo de San José.',
-    },
-    {
-      icon: Cpu,
-      title: 'Tecnología Moderna',
-      description: 'Desarrollado con las últimas herramientas y mejores prácticas.',
-    },
-  ];
+// Diálogo personalizado
+const SimpleDialog = ({ 
+  isOpen, 
+  onClose, 
+  children 
+}: { 
+  isOpen: boolean; 
+  onClose: () => void; 
+  children: React.ReactNode;
+}) => {
+  if (!isOpen) return null;
 
   return (
-    <section id="game" className="relative py-24 sm:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-gray-900/30 to-background" />
-      <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-orange-500/20 to-transparent" />
+    <>
+      <div 
+        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+        onClick={onClose}
+      />
+      <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md">
+        {children}
+      </div>
+    </>
+  );
+};
 
+const GamesSection = () => {
+  const [showDialog, setShowDialog] = useState(false);
+  const [currentScreenshot, setCurrentScreenshot] = useState(0);
+
+  // Simulamos 5 capturas del juego (después las reemplazás con las reales)
+  const screenshots = [
+    '/sanjose-1.jpg',
+    '/sanjose-2.jpg',
+    '/sanjose-3.jpg',
+    '/sanjose-4.jpg',
+    '/sanjose-5.jpg',
+  ];
+
+  // Carrusel automático cada 4 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentScreenshot((prev) => (prev + 1) % screenshots.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [screenshots.length]);
+
+  const nextSlide = () => {
+    setCurrentScreenshot((prev) => (prev + 1) % screenshots.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentScreenshot((prev) => (prev - 1 + screenshots.length) % screenshots.length);
+  };
+
+  return (
+    <section id="juegos" className="relative py-24 sm:py-32 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-gray-900/20 to-background" />
+      
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-400 text-sm font-medium mb-4">
-            En Desarrollo
+            Mis Juegos
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            <span className="text-gradient">San José</span>
+            Experiencias para <span className="text-gradient">jugar</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Nuestro primer proyecto como estudio. Una experiencia que estamos construyendo 
-            con dedicación y atención a cada detalle.
+            Cada proyecto es una nueva aventura. Descubrí lo que estoy creando.
           </p>
         </div>
 
-        {/* Main Content */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Game Visual */}
-          <div className="relative group">
+        {/* Games Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* San José - Carrusel de capturas */}
+          <div className="md:col-span-2 lg:col-span-2 group relative">
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 group-hover:border-orange-500/50 transition-all">
-              {/* Placeholder for Game Screenshot */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center glow-orange-strong">
-                    <Gamepad2 className="w-12 h-12 text-white" />
-                  </div>
-                  <p className="text-gray-400 text-sm">Próximamente</p>
-                  <p className="text-white font-semibold">Screenshots del juego</p>
-                </div>
+              
+              {/* Carrusel de imágenes */}
+              <div className="relative w-full h-full">
+                {screenshots.map((src, index) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`San José - Echoes from the Abyss ${index + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                      index === currentScreenshot ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                ))}
               </div>
 
-              {/* Overlay Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+              {/* Gradiente superpuesto (sutil) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
 
-              {/* Coming Soon Badge */}
-              <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-orange-500/90 text-white text-sm font-medium">
-                En Desarrollo
+              {/* Controles del carrusel (aparecen en hover) */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-orange-500/80"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-orange-500/80"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Indicadores de posición */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {screenshots.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentScreenshot(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentScreenshot 
+                        ? 'w-6 bg-orange-500' 
+                        : 'bg-white/50 hover:bg-white/80'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Badges superiores (siempre visibles) */}
+              <div className="absolute top-4 left-4 flex gap-2">
+                <span className="px-3 py-1 rounded-full bg-orange-500/90 text-white text-xs font-medium">
+                  En Desarrollo
+                </span>
+                <span className="px-3 py-1 rounded-full bg-gray-700/80 text-gray-300 text-xs">
+                  PC
+                </span>
               </div>
             </div>
 
-            {/* Decorative Elements */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/20 to-red-500/20 rounded-3xl blur-2xl -z-10 opacity-50 group-hover:opacity-75 transition-opacity" />
+            {/* Información del juego (debajo de la imagen) */}
+            <div className="mt-4">
+              <h3 className="text-2xl font-bold text-white mb-2">San José</h3>
+              <p className="text-gray-400 text-sm mb-3">
+                Echoes from the Abyss. Una aventura que te llevará a explorar mundos llenos de misterio y emoción.
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowDialog(true)}
+                  className="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg text-white text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Ver más
+                </button>
+                <a
+                  href="https://youtube.com/@sanjosegame"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-red-600/90 hover:bg-red-500 rounded-lg text-white text-sm font-medium transition-all flex items-center gap-2"
+                >
+                  <Youtube className="w-4 h-4" />
+                  YouTube
+                </a>
+                <a
+                  href="https://instagram.com/sanjosegame"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-90 rounded-lg text-white text-sm font-medium transition-all flex items-center gap-2"
+                >
+                  <Instagram className="w-4 h-4" />
+                  Instagram
+                </a>
+              </div>
+            </div>
           </div>
 
-          {/* Game Info */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                Una nueva aventura te espera
+          {/* Próximo Proyecto - Versión mejorada */}
+          <div className="group">
+            <div className="relative h-full min-h-[320px] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/30 border-dashed group-hover:border-orange-500/30 transition-all flex flex-col items-center justify-center p-8 text-center">
+              <div className="w-20 h-20 rounded-xl bg-gray-800 flex items-center justify-center mb-6 group-hover:bg-orange-500/10 transition-colors group-hover:scale-110 duration-300">
+                <span className="text-4xl">🎮</span>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-orange-400 transition-colors">
+                Próximo Proyecto
               </h3>
-              <p className="text-gray-400 leading-relaxed mb-4">
-                San José es un proyecto que lleva meses de planificación y desarrollo. 
-                Aunque aún no podemos revelar todos los detalles, estamos construyendo 
-                algo especial que esperamos compartir pronto con la comunidad.
+              <p className="text-gray-400 text-base max-w-xs">
+                Tengo nuevas ideas en desarrollo. Cada proyecto busca sorprender y emocionar. 
+                ¡Seguí el camino de San José y lo que viene!
               </p>
-              <p className="text-gray-400 leading-relaxed">
-                Mantente atento a nuestras redes para conocer más sobre el progreso 
-                del desarrollo y las fechas de lanzamiento.
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4">
-              <div className="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50 text-center">
-                <Calendar className="w-5 h-5 text-orange-400 mx-auto mb-2" />
-                <div className="text-sm text-gray-500">Estado</div>
-                <div className="text-white font-semibold">Dev</div>
-              </div>
-              <div className="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50 text-center">
-                <Monitor className="w-5 h-5 text-orange-400 mx-auto mb-2" />
-                <div className="text-sm text-gray-500">Plataforma</div>
-                <div className="text-white font-semibold">PC</div>
-              </div>
-              <div className="p-4 rounded-xl bg-gray-800/50 border border-gray-700/50 text-center">
-                <Cpu className="w-5 h-5 text-orange-400 mx-auto mb-2" />
-                <div className="text-sm text-gray-500">Motor</div>
-                <div className="text-white font-semibold">TBD</div>
+              
+              {/* Efecto de "próximamente" */}
+              <div className="absolute bottom-4 right-4 px-3 py-1 bg-orange-500/20 rounded-full border border-orange-500/30">
+                <span className="text-xs text-orange-400">Próximamente</span>
               </div>
             </div>
-
-            {/* CTA */}
-            <button
-              onClick={() => setShowDialog(true)}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl font-semibold text-white hover:opacity-90 transition-opacity glow-orange flex items-center justify-center gap-2"
-            >
-              <ExternalLink className="w-5 h-5" />
-              Quiero saber más
-            </button>
           </div>
         </div>
 
         {/* Features */}
         <div className="grid sm:grid-cols-3 gap-6 mt-16">
-          {features.map((feature, index) => (
+          {[
+            {
+              title: 'Narrativa',
+              desc: 'Historias que te atrapan desde el primer minuto, donde tus decisiones importan y cada descubrimiento deja huella.',
+            },
+            {
+              title: 'Gameplay',
+              desc: 'Mecánicas divertidas y adictivas.',
+            },
+            {
+              title: 'Arte',
+              desc: 'Estilo visual único y memorable.',
+            },
+          ].map((feature) => (
             <div
               key={feature.title}
               className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all"
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <feature.icon className="w-8 h-8 text-orange-400 mb-4" />
               <h4 className="text-lg font-semibold text-white mb-2">{feature.title}</h4>
-              <p className="text-gray-400 text-sm">{feature.description}</p>
+              <p className="text-gray-400 text-sm">{feature.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Dialog */}
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent className="bg-gray-900 border-gray-700 text-white max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-gradient">
-              ¡Gracias por tu interés!
-            </DialogTitle>
-            <DialogDescription className="text-gray-400">
-              Estamos trabajando arduamente en San José. 
+      {/* Diálogo personalizado */}
+      <SimpleDialog isOpen={showDialog} onClose={() => setShowDialog(false)}>
+        <div className="bg-gray-900 border border-gray-700 rounded-xl p-6 text-white">
+          <div className="text-center mb-4">
+            <h3 className="text-2xl font-bold text-gradient mb-2">
+              San José está en desarrollo
+            </h3>
+            <p className="text-gray-400">
+              Estoy trabajando día a día para traerte una experiencia increíble.
               <br /><br />
-              Pronto compartiremos más información sobre el juego, 
-              incluyendo screenshots, gameplay y fechas importantes.
+              Seguime en YouTube e Instagram para ver el progreso, trailers y behind-the-scenes.
               <br /><br />
-              ¡Sigue atento a nuestras redes sociales!
-            </DialogDescription>
-          </DialogHeader>
-          <div className="mt-4">
+              ¡Gracias por tu apoyo!
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 mt-4">
+            <a
+              href="https://youtube.com/@sanjosegame"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full px-4 py-3 bg-red-600 hover:bg-red-500 rounded-lg text-white font-medium transition-colors flex items-center justify-center gap-2"
+            >
+              <Youtube className="w-5 h-5" />
+              Ver en YouTube
+            </a>
+            <a
+              href="https://instagram.com/sanjosegame"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-90 rounded-lg text-white font-medium transition-opacity flex items-center justify-center gap-2"
+            >
+              <Instagram className="w-5 h-5" />
+              Seguir en Instagram
+            </a>
             <button
               onClick={() => setShowDialog(false)}
-              className="w-full px-4 py-2 bg-orange-500 hover:bg-orange-600 rounded-lg text-white font-medium transition-colors"
+              className="w-full px-4 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-medium transition-colors"
             >
-              Entendido
+              Cerrar
             </button>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      </SimpleDialog>
     </section>
   );
 };
 
-export default GameSection;
+export default GamesSection;
