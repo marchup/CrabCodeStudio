@@ -1,7 +1,7 @@
-import { ExternalLink, Youtube, Instagram } from 'lucide-react';
-import { useState } from 'react';
+import { ExternalLink, Youtube, Instagram, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-// Diálogo personalizado (reemplaza la importación faltante)
+// Diálogo personalizado
 const SimpleDialog = ({ 
   isOpen, 
   onClose, 
@@ -15,12 +15,10 @@ const SimpleDialog = ({
 
   return (
     <>
-      {/* Overlay */}
       <div 
         className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
         onClick={onClose}
       />
-      {/* Dialog Content */}
       <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md">
         {children}
       </div>
@@ -30,6 +28,32 @@ const SimpleDialog = ({
 
 const GamesSection = () => {
   const [showDialog, setShowDialog] = useState(false);
+  const [currentScreenshot, setCurrentScreenshot] = useState(0);
+
+  // Simulamos 5 capturas del juego (después las reemplazás con las reales)
+  const screenshots = [
+    '/sanjose-1.jpg',
+    '/sanjose-2.jpg',
+    '/sanjose-3.jpg',
+    '/sanjose-4.jpg',
+    '/sanjose-5.jpg',
+  ];
+
+  // Carrusel automático cada 4 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentScreenshot((prev) => (prev + 1) % screenshots.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [screenshots.length]);
+
+  const nextSlide = () => {
+    setCurrentScreenshot((prev) => (prev + 1) % screenshots.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentScreenshot((prev) => (prev - 1 + screenshots.length) % screenshots.length);
+  };
 
   return (
     <section id="juegos" className="relative py-24 sm:py-32 overflow-hidden">
@@ -40,95 +64,125 @@ const GamesSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-400 text-sm font-medium mb-4">
-            Mis Juegos
+            Mi Primer Juego
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Experiencias para <span className="text-gradient">jugar</span>
+            San José <span className="text-gradient">Echoes from the Abyss</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Cada proyecto es una nueva aventura. Descubrí lo que estoy creando.
+            Un mar oscuro, un padre desaparecido, un misterio que desafía el tiempo.
           </p>
         </div>
 
-        {/* Games Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* San José - Main Game */}
-          <div className="md:col-span-2 lg:col-span-2 group">
+        {/* Games Grid - AHORA UNA SOLA COLUMNA PARA SAN JOSÉ */}
+        <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+          {/* San José - Carrusel de capturas (ocupa todo el ancho) */}
+          <div className="group relative">
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 group-hover:border-orange-500/50 transition-all">
-              {/* Game Screenshot */}
-              <img 
-                src="/sanjose-screenshot.png" 
-                alt="San José - Echoes from the Abyss"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
+              
+              {/* Carrusel de imágenes */}
+              <div className="relative w-full h-full">
+                {screenshots.map((src, index) => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={`San José - Echoes from the Abyss ${index + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                      index === currentScreenshot ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                ))}
+              </div>
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/30 to-transparent" />
+              {/* Gradiente superpuesto (sutil) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
 
-              {/* Content */}
-              <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="px-3 py-1 rounded-full bg-orange-500/90 text-white text-xs font-medium">
-                    En Desarrollo
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-gray-700/80 text-gray-300 text-xs">
-                    PC
-                  </span>
-                </div>
-                <h3 className="text-3xl font-bold text-white mb-2">San José</h3>
-                <p className="text-gray-200 mb-4 max-w-lg text-shadow">
-                  Echoes from the Abyss. Una aventura que te llevará a explorar mundos llenos de misterio y emoción.
-                </p>
-                <div className="flex flex-wrap gap-3">
+              {/* Controles del carrusel (aparecen en hover) */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-orange-500/80"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-orange-500/80"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Indicadores de posición */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {screenshots.map((_, index) => (
                   <button
-                    onClick={() => setShowDialog(true)}
-                    className="px-5 py-2.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg text-white font-medium hover:opacity-90 transition-opacity flex items-center gap-2"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Ver más
-                  </button>
-                  <a
-                    href="https://youtube.com/@sanjosegame"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 py-2.5 bg-red-600/90 hover:bg-red-500 rounded-lg text-white font-medium transition-all flex items-center gap-2"
-                  >
-                    <Youtube className="w-4 h-4" />
-                    YouTube
-                  </a>
-                  <a
-                    href="https://instagram.com/sanjosegame"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-90 rounded-lg text-white font-medium transition-all flex items-center gap-2"
-                  >
-                    <Instagram className="w-4 h-4" />
-                    Instagram
-                  </a>
-                </div>
+                    key={index}
+                    onClick={() => setCurrentScreenshot(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentScreenshot 
+                        ? 'w-6 bg-orange-500' 
+                        : 'bg-white/50 hover:bg-white/80'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Badges superiores (siempre visibles) */}
+              <div className="absolute top-4 left-4 flex gap-2">
+                <span className="px-3 py-1 rounded-full bg-orange-500/90 text-white text-xs font-medium">
+                  En Desarrollo
+                </span>
+                <span className="px-3 py-1 rounded-full bg-gray-700/80 text-gray-300 text-xs">
+                  PC
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Coming Soon Card */}
-          <div className="group">
-            <div className="relative h-full min-h-[280px] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800/50 to-gray-900/50 border border-gray-700/30 border-dashed group-hover:border-orange-500/30 transition-all flex flex-col items-center justify-center p-6">
-              <div className="w-16 h-16 rounded-xl bg-gray-800 flex items-center justify-center mb-4 group-hover:bg-orange-500/10 transition-colors">
-                <span className="text-3xl">🎮</span>
+          {/* Información y botones - AHORA DEBAJO EN SU PROPIA TARJETA */}
+          <div className="bg-gray-800/30 border border-gray-700/30 rounded-2xl p-8 hover:border-orange-500/30 transition-all">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-white mb-3">San José</h3>
+                <p className="text-gray-400 text-base leading-relaxed">
+                  Echoes from the Abyss. Una aventura que te llevará a explorar mundos 
+                  llenos de misterio y emoción. Un padre desaparecido, un secreto que 
+                  espera ser descubierto en las profundidades.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-gray-400 mb-2 group-hover:text-white transition-colors">
-                Próximo Proyecto
-              </h3>
-              <p className="text-gray-500 text-center text-sm">
-                Tengo nuevas ideas en desarrollo. Cada proyecto busca sorprender y emocionar. 
-                ¡Seguí el camino de San José y lo que viene!
-              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  onClick={() => setShowDialog(true)}
+                  className="px-5 py-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl text-white font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2 whitespace-nowrap"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                  Ver más
+                </button>
+                <a
+                  href="https://youtube.com/@sanjosegame"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 bg-red-600/90 hover:bg-red-500 rounded-xl text-white font-medium transition-all flex items-center justify-center gap-2"
+                >
+                  <Youtube className="w-5 h-5" />
+                  YouTube
+                </a>
+                <a
+                  href="https://instagram.com/sanjosegame"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-90 rounded-xl text-white font-medium transition-all flex items-center justify-center gap-2"
+                >
+                  <Instagram className="w-5 h-5" />
+                  Instagram
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Features */}
-        <div className="grid sm:grid-cols-3 gap-6 mt-16">
+        <div className="grid sm:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
           {[
             {
               title: 'Narrativa',
