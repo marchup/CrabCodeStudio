@@ -26,7 +26,7 @@ const SimpleDialog = ({
   );
 };
 
-const GamesSection = () => {
+const GameSection = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
 
@@ -64,23 +64,23 @@ const GamesSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-400 text-sm font-medium mb-4">
-            Mi Primer Juego
+            San José
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            San José <span className="text-gradient">Echoes from the Abyss</span>
+            <span className="text-gradient">Echoes from the Abyss</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Un mar oscuro, un padre desaparecido, un misterio que desafía el tiempo.
           </p>
         </div>
 
-        {/* Games Grid - AHORA UNA SOLA COLUMNA PARA SAN JOSÉ */}
-        <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
-          {/* San José - Carrusel de capturas (ocupa todo el ancho) */}
-          <div className="group relative">
+        {/* Contenedor principal - SOLO EL CARRUSEL */}
+        <div className="max-w-4xl mx-auto">
+          {/* Carrusel de capturas (SIN TEXTO NI BOTONES DENTRO) */}
+          <div className="group relative mb-8">
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 group-hover:border-orange-500/50 transition-all">
               
-              {/* Carrusel de imágenes */}
+              {/* Imágenes del carrusel */}
               <div className="relative w-full h-full">
                 {screenshots.map((src, index) => (
                   <img
@@ -94,10 +94,10 @@ const GamesSection = () => {
                 ))}
               </div>
 
-              {/* Gradiente superpuesto (sutil) */}
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
+              {/* Gradiente superpuesto (sutil, solo para que se vean bien los controles) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent" />
 
-              {/* Controles del carrusel (aparecen en hover) */}
+              {/* Controles del carrusel */}
               <button
                 onClick={prevSlide}
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-orange-500/80"
@@ -126,7 +126,7 @@ const GamesSection = () => {
                 ))}
               </div>
 
-              {/* Badges superiores (siempre visibles) */}
+              {/* Badges superiores (únicos elementos dentro de la imagen) */}
               <div className="absolute top-4 left-4 flex gap-2">
                 <span className="px-3 py-1 rounded-full bg-orange-500/90 text-white text-xs font-medium">
                   En Desarrollo
@@ -138,7 +138,7 @@ const GamesSection = () => {
             </div>
           </div>
 
-          {/* Información y botones - AHORA DEBAJO EN SU PROPIA TARJETA */}
+          {/* TEXTO Y BOTONES - FUERA DE LA IMAGEN, EN SU PROPIA CAJA */}
           <div className="bg-gray-800/30 border border-gray-700/30 rounded-2xl p-8 hover:border-orange-500/30 transition-all">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div className="flex-1">
@@ -255,4 +255,4 @@ const GamesSection = () => {
   );
 };
 
-export default GamesSection;
+export default GameSection;
