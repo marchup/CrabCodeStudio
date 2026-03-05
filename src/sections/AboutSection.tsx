@@ -116,7 +116,7 @@ const AboutSection = () => {
                La isla de San José nació en esta playa
               </p>
                 <p className="text-xs text-gray-300 mt-2 font-medium">
-                Con ella, la aventura empezó antes del código
+                En este lugar increíble, la aventura comenzó antes que el primer código
               </p>
             </div>
             
