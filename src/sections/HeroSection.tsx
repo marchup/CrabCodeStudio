@@ -135,8 +135,10 @@ const HeroSection = () => {
         </p>
 
         <p className="text-base text-gray-500 max-w-xl mx-auto mb-10">
-          Soy un desarrollador indie de Argentina. Creo juegos con alma, 
-          donde cada pixel cuenta una historia.
+          Soy un desarrollador indie de Argentina. 
+          Estoy desarrollando San José, un juego que refleja mi pasión por el mar
+          y las historias humanas. Cada decisión en él cuenta lo que me importa transmitir y
+          la experiencia que quiero que los jugadores vivan.
         </p>
 
         <button
