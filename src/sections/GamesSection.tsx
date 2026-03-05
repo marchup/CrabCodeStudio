@@ -191,8 +191,8 @@ const GameSection = () => {
               Narrativa
             </h4>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Una historia íntima atravesada por el misterio y la ciencia, donde cada hallazgo 
-              revela una nueva capa del océano… y de tu pasado.
+              Una historia fuerte y emotiva, llena de personajes humanos y decisiones que importan.
+              Cada elección revela secretos del océano… y del pasado de Gabriel.
             </p>
           </div>
 
@@ -202,8 +202,8 @@ const GameSection = () => {
               Gameplay
             </h4>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Exploración, pesca y experimentación científica nacidas de vivencias reales en el mar, 
-              donde cada recurso y cada decisión tienen propósito.
+              Navega el Estrella del Sur entre misterios del mar y fenómenos que desafían la lógica.
+              Explora islas, pesca, investiga anomalías y toma decisiones que cambiarán tu historia y tu destino.
             </p>
           </div>
 
@@ -213,9 +213,10 @@ const GameSection = () => {
               Arte
             </h4>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Una identidad visual guiada por el amor al mar, que no busca copiar la realidad, 
-              sino transmitir emoción, misterio y el profundo vínculo humano con el océano, 
-              priorizando la atmósfera por sobre el realismo técnico.
+              El arte de SJ prioriza la experiencia sobre el realismo técnico: eliminé HUDs y elementos que distraigan,
+              diseñé una paleta de colores propia para reforzar la identidad del juego y cada cielo,
+              mar y escenario está pensado para que la luz, la sombra y el clima cuenten parte de la historia.
+              Todo busca que el jugador sienta el mar y el misterio sin que la interfaz rompa la inmersión.
             </p>
           </div>
         </div>
