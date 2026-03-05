@@ -229,7 +229,8 @@ const GameSection = () => {
               San José está en desarrollo
             </h3>
             <p className="text-gray-400">
-              Estoy trabajando día a día para traerte una experiencia increíble.
+              Estoy trabajando día a día para traerte una experiencia memorable:
+              cada descubrimiento, cada error, cada momento que me inspiró San José… para que lo sientas como yo lo sentí.
               <br /><br />
               Seguime en YouTube e Instagram para ver el progreso, trailers y behind-the-scenes.
               <br /><br />
