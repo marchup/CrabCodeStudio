@@ -110,10 +110,16 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* Indicador del efecto */}
-            <p className="text-xs text-orange-500/50 mt-3 font-mono">
-              {blendProgress > 0.8 ? '🎨 pintura' : '📸✨ destello'}
-            </p>
+            {/* El origen de San José */}
+<div className="mt-4 text-center">
+  <p className="text-xs text-orange-400/80 font-mono leading-relaxed max-w-[220px] mx-auto">
+    🌊 La isla de San José nació en esta playa
+  </p>
+  <p className="text-[10px] text-gray-500 mt-1">
+    Con ella, la aventura empezó antes del código
+  </p>
+</div>
+            
           </div>
 
           {/* Columna derecha - Texto */}
