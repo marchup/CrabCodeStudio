@@ -30,7 +30,7 @@ const GameSection = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
 
-  // ✅ 7 IMÁGENES
+  // 7 IMÁGENES
   const screenshots = [
     '/sanjose-screenshot.png',
     '/sanjose-screenshot2.png',
@@ -63,7 +63,7 @@ const GameSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-gray-900/20 to-background" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header - SIN BADGE SUPERFLUO */}
+        {/* Section Header - FRASE CORTA ARRIBA */}
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3">
             San José
@@ -72,7 +72,7 @@ const GameSection = () => {
             Echoes from the Abyss
           </h3>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Un padre desaparecido, un barco a la deriva y un misterio que desafía el tiempo.
+            Un padre desaparecido. Un hijo decidido. Un barco que flota entre lo real y lo imposible.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ const GameSection = () => {
           <div className="group relative mb-8">
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 group-hover:border-orange-500/50 transition-all">
               
-              {/* Imágenes del carrusel - 7 capturas */}
+              {/* Imágenes del carrusel */}
               <div className="relative w-full h-full">
                 {screenshots.map((src, index) => (
                   <img
@@ -113,7 +113,7 @@ const GameSection = () => {
                 <ChevronRight className="w-6 h-6" />
               </button>
 
-              {/* Indicadores de posición - 7 puntitos */}
+              {/* Indicadores de posición */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                 {screenshots.map((_, index) => (
                   <button
@@ -183,7 +183,7 @@ const GameSection = () => {
           </div>
         </div>
 
-        {/* FEATURES */}
+        {/* FEATURES - CON TEXTO DE ARTE MÁS CONCISO */}
         <div className="grid sm:grid-cols-3 gap-6 mt-16 max-w-6xl mx-auto">
           {/* Narrativa */}
           <div className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all group">
@@ -207,16 +207,15 @@ const GameSection = () => {
             </p>
           </div>
 
-          {/* Arte */}
+          {/* Arte - VERSIÓN MÁS CONCISA */}
           <div className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all group">
             <h4 className="text-lg font-semibold text-white mb-3 group-hover:text-orange-400 transition-colors">
               Arte
             </h4>
             <p className="text-gray-400 text-sm leading-relaxed">
-              El arte de SJ prioriza la experiencia sobre el realismo técnico: eliminé HUDs y elementos que distraigan,
-              diseñé una paleta de colores propia para reforzar la identidad del juego y cada cielo,
-              mar y escenario está pensado para que la luz, la sombra y el clima cuenten parte de la historia.
-              Todo busca que el jugador sienta el mar y el misterio sin que la interfaz rompa la inmersión.
+              Arte y atmósfera pensados para sumergirte sin distracciones. Paleta de colores propia, 
+              luz y clima que cuentan la historia, y cero HUDs que rompan la magia. 
+              Todo para que sientas el mar y el misterio sin que nada te saque de la experiencia.
             </p>
           </div>
         </div>
