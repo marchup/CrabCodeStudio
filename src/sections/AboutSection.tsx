@@ -10,7 +10,7 @@ const AboutSection = () => {
     // Efecto de transición suave entre las dos imágenes
     const interval = setInterval(() => {
       setBlendProgress((prev) => {
-        const newProgress = prev + direction * 0.01;
+        const newProgress = prev + direction * 0.1;
         
         // Cambiar dirección cuando llega a los extremos
         if (newProgress >= 1) {
