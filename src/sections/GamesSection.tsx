@@ -229,13 +229,18 @@ const GameSection = () => {
               San José está en desarrollo
             </h3>
             <p className="text-gray-400">
-              Estoy trabajando día a día para traerte una experiencia memorable:
-              cada descubrimiento, cada error, cada momento que me inspiró San José… para que lo sientas como yo lo sentí.
-              <br /><br />
-              Seguime en YouTube e Instagram para ver el progreso, trailers y behind-the-scenes.
-              <br /><br />
-              ¡Gracias por tu apoyo!
+            Este juego lo estoy construyendo día a día, paso a paso, con mucho esfuerzo.
+            Es una historia sobre el mar, el misterio y un hijo que intenta cambiar el destino de su padre.
+            
+            <br /><br />
+              Si querés seguir el desarrollo, ver trailers y contenido detrás del proyecto,
+              podés hacerlo en YouTube e Instagram.
             </p>
+
+            <p className="mt-6 text-white font-semibold">
+              Gracias por acompañar este proyecto ❤️
+            </p>
+          
           </div>
           <div className="flex flex-col gap-3 mt-4">
             <a
