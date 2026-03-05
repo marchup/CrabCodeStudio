@@ -30,6 +30,7 @@ const GameSection = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
 
+  // ✅ RUTAS CORRECTAS
   const screenshots = [
     '/sanjose-screenshot.png',
     '/sanjose-screenshot2.png',
@@ -39,6 +40,7 @@ const GameSection = () => {
     '/sanjose-screenshot6.png',
   ];
 
+  // Carrusel automático cada 4 segundos
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentScreenshot((prev) => (prev + 1) % screenshots.length);
@@ -56,18 +58,19 @@ const GameSection = () => {
 
   return (
     <section id="juegos" className="relative py-24 sm:py-32 overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-gray-900/20 to-background" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header - TÍTULOS CORREGIDOS */}
+        {/* Section Header - AHORA CON SAN JOSÉ GRANDE Y ECHOES GRANDE */}
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-400 text-sm font-medium mb-4">
             San José
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3">
             San José
           </h2>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl text-gradient mb-4">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl text-gradient mb-4">
             Echoes from the Abyss
           </h3>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
@@ -77,10 +80,11 @@ const GameSection = () => {
 
         {/* Contenedor principal */}
         <div className="max-w-4xl mx-auto">
-          {/* Carrusel */}
+          {/* Carrusel de capturas */}
           <div className="group relative mb-8">
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 group-hover:border-orange-500/50 transition-all">
               
+              {/* Imágenes del carrusel */}
               <div className="relative w-full h-full">
                 {screenshots.map((src, index) => (
                   <img
@@ -94,8 +98,10 @@ const GameSection = () => {
                 ))}
               </div>
 
+              {/* Gradiente superpuesto */}
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent" />
 
+              {/* Controles del carrusel */}
               <button
                 onClick={prevSlide}
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-orange-500/80"
@@ -109,6 +115,7 @@ const GameSection = () => {
                 <ChevronRight className="w-6 h-6" />
               </button>
 
+              {/* Indicadores de posición */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                 {screenshots.map((_, index) => (
                   <button
@@ -123,6 +130,7 @@ const GameSection = () => {
                 ))}
               </div>
 
+              {/* Badges superiores */}
               <div className="absolute top-4 left-4 flex gap-2">
                 <span className="px-3 py-1 rounded-full bg-orange-500/90 text-white text-xs font-medium">
                   En Desarrollo
@@ -134,7 +142,7 @@ const GameSection = () => {
             </div>
           </div>
 
-          {/* Info y botones */}
+          {/* TEXTO Y BOTONES */}
           <div className="bg-gray-800/30 border border-gray-700/30 rounded-2xl p-8 hover:border-orange-500/30 transition-all">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               <div className="flex-1">
@@ -177,8 +185,9 @@ const GameSection = () => {
           </div>
         </div>
 
-        {/* Features */}
+        {/* FEATURES */}
         <div className="grid sm:grid-cols-3 gap-6 mt-16 max-w-6xl mx-auto">
+          {/* Narrativa */}
           <div className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all group">
             <h4 className="text-lg font-semibold text-white mb-3 group-hover:text-orange-400 transition-colors">
               Narrativa
@@ -189,6 +198,7 @@ const GameSection = () => {
             </p>
           </div>
 
+          {/* Gameplay */}
           <div className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all group">
             <h4 className="text-lg font-semibold text-white mb-3 group-hover:text-orange-400 transition-colors">
               Gameplay
@@ -199,6 +209,7 @@ const GameSection = () => {
             </p>
           </div>
 
+          {/* Arte */}
           <div className="p-6 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-orange-500/30 hover:bg-gray-800/50 transition-all group">
             <h4 className="text-lg font-semibold text-white mb-3 group-hover:text-orange-400 transition-colors">
               Arte
