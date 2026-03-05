@@ -72,7 +72,7 @@ const GameSection = () => {
             Echoes from the Abyss
           </h3>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Un mar oscuro, un padre desaparecido, un misterio que desafía el tiempo.
+            Un padre desaparecido, un barco a la deriva y un misterio que desafía el tiempo.
           </p>
         </div>
 
@@ -146,9 +146,9 @@ const GameSection = () => {
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-white mb-3">San José</h3>
                 <p className="text-gray-400 text-base leading-relaxed">
-                  Echoes from the Abyss. Una aventura que te llevará a explorar mundos 
-                  llenos de misterio y emoción. Un padre desaparecido, un secreto que 
-                  espera ser descubierto en las profundidades.
+                  Echoes from the Abyss. 
+                  Un padre desaparecido. Un hijo decidido. Un barco que flota entre lo real y lo imposible.
+                  Cada elección puede salvarlo… o condenarlo. ¿Hasta dónde llegarías para cambiar el destino?
                 </p>
               </div>
               
