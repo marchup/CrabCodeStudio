@@ -3,27 +3,29 @@ import CrabLogo from '../components/CrabLogo';
 
 const AboutSection = () => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const [blendProgress, setBlendProgress] = useState(0); // 0 = foto real, 1 = pintura
-  const [direction, setDirection] = useState(1); // 1 = hacia pintura, -1 = hacia real
+  const [blendProgress, setBlendProgress] = useState(1);
+  const [direction, setDirection] = useState(-0.2);
+  const [isFlashing, setIsFlashing] = useState(false);
 
   useEffect(() => {
-    // Efecto de transición suave entre las dos imágenes
     const interval = setInterval(() => {
       setBlendProgress((prev) => {
-        const newProgress = prev + direction * 0.1;
+        const newProgress = prev + direction * 0.02;
         
-        // Cambiar dirección cuando llega a los extremos
         if (newProgress >= 1) {
-          setDirection(-1);
+          setDirection(-0.2);
           return 1;
         }
         if (newProgress <= 0) {
-          setDirection(1);
+          setDirection(0.5);
+          // Activar destello cuando aparece la foto real
+          setIsFlashing(true);
+          setTimeout(() => setIsFlashing(false), 150);
           return 0;
         }
         return newProgress;
       });
-    }, 100); // Cada 100ms avanza 1%
+    }, 50);
 
     return () => clearInterval(interval);
   }, [direction]);
@@ -45,31 +47,44 @@ const AboutSection = () => {
           </h2>
         </div>
 
-        {/* Content - CON FOTO CON EFECTO BLEND */}
+        {/* Content */}
         <div className="flex flex-col lg:flex-row gap-12 items-start">
-          {/* Columna izquierda - Foto con blend */}
+          {/* Columna izquierda - Foto con blend y destello */}
           <div className="lg:w-1/3 flex flex-col items-center">
             {/* Contenedor de la foto con efecto */}
             <div className="relative mb-6 group w-64 h-64">
-              {/* Foto real (base) */}
+              {/* Foto real */}
               <img 
-                src="/mi-foto-real.png" // Cambiá por tu foto real
+                src="/mi-foto-real.png"
                 alt="Martín - CrabCode Games (real)"
-                className="absolute inset-0 w-full h-full rounded-2xl object-cover border-2 border-orange-500/30 group-hover:border-orange-500/60 transition-all"
+                className="absolute inset-0 w-full h-full rounded-2xl object-cover border-2 border-orange-500/30 transition-all"
+                style={{
+                  opacity: 1 - blendProgress,
+                }}
               />
               
-              {/* Versión pintura (superpuesta con opacidad variable) */}
+              {/* Versión pintura */}
               <img 
-                src="/mi-foto-pintura.png" // Cambiá por tu versión acuarela
+                src="/mi-foto-pintura.png"
                 alt="Martín - CrabCode Games (pintura)"
-                className="absolute inset-0 w-full h-full rounded-2xl object-cover border-2 border-orange-500/30 group-hover:border-orange-500/60 transition-all"
+                className="absolute inset-0 w-full h-full rounded-2xl object-cover border-2 border-orange-500/30 transition-all"
                 style={{ 
                   opacity: blendProgress,
-                  mixBlendMode: 'multiply', // Esto hace que se mezclen como capas
                 }}
               />
 
-              {/* Efecto glow */}
+              {/* EFECTO DESTELLO - capa blanca que aparece y desaparece */}
+              <div 
+                className={`absolute inset-0 rounded-2xl bg-white transition-opacity duration-150 ${
+                  isFlashing ? 'opacity-40' : 'opacity-0'
+                }`}
+                style={{
+                  mixBlendMode: 'overlay',
+                  pointerEvents: 'none',
+                }}
+              />
+
+              {/* Efecto glow base */}
               <div className="absolute inset-0 rounded-2xl bg-orange-500/10 blur-xl -z-10 group-hover:bg-orange-500/20 transition-all" />
             </div>
 
@@ -95,13 +110,13 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* Indicador sutil del efecto */}
+            {/* Indicador del efecto */}
             <p className="text-xs text-orange-500/50 mt-3 font-mono">
-              realidad → pintura → realidad
+              {blendProgress > 0.8 ? '🎨 pintura' : '📸✨ destello'}
             </p>
           </div>
 
-          {/* Columna derecha - Texto (igual que antes) */}
+          {/* Columna derecha - Texto */}
           <div className="lg:w-2/3">
             <div className="space-y-6 max-w-3xl mx-auto text-left">
               <p className="text-lg text-gray-300 leading-relaxed">
