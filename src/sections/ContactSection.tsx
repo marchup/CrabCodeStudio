@@ -73,8 +73,8 @@ const ContactSection = () => {
               Seguí el <span className="text-gradient">desarrollo</span>
             </h2>
             <p className="text-lg text-gray-400 max-w-xl mx-auto">
-              Enterate primero de trailers, betas y secretos de San José. 
-              Sin spam, solo contenido del juego.
+              Enterate primero de trailers, betas y avances del juego.
+              Sin spam, solo contenido del desarrollo.
             </p>
           </div>
 
