@@ -30,7 +30,7 @@ const GameSection = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [currentScreenshot, setCurrentScreenshot] = useState(0);
 
-  // ✅ RUTAS CORRECTAS
+  // ✅ 7 IMÁGENES
   const screenshots = [
     '/sanjose-screenshot.png',
     '/sanjose-screenshot2.png',
@@ -63,11 +63,8 @@ const GameSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-gray-900/20 to-background" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header - AHORA CON SAN JOSÉ GRANDE Y ECHOES GRANDE */}
+        {/* Section Header - SIN BADGE SUPERFLUO */}
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-orange-500/10 text-orange-400 text-sm font-medium mb-4">
-            San José
-          </span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3">
             San José
           </h2>
@@ -85,7 +82,7 @@ const GameSection = () => {
           <div className="group relative mb-8">
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 group-hover:border-orange-500/50 transition-all">
               
-              {/* Imágenes del carrusel */}
+              {/* Imágenes del carrusel - 7 capturas */}
               <div className="relative w-full h-full">
                 {screenshots.map((src, index) => (
                   <img
@@ -116,7 +113,7 @@ const GameSection = () => {
                 <ChevronRight className="w-6 h-6" />
               </button>
 
-              {/* Indicadores de posición */}
+              {/* Indicadores de posición - 7 puntitos */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                 {screenshots.map((_, index) => (
                   <button
